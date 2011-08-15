@@ -4,7 +4,17 @@ title: Finding deps
 
 ## Searching for Deps
 
-TODO
+Whenever a public dep is run with babushka, the result is recorded anonymously in a public database at [http://babushka.me]. You can query this database using babushka's `search` subcommand. It returns a list of matching deps, along with a measure of their popularity and reliability.
+
+To find, say, deps about coffee, run this command:
+
+    $ babushka search coffee
+
+You'll see a table of results returned by the web service.
+
+The webservice has a public API that babushka accesses. You can hit the API directly if you like; the search url is `/deps/search.json/<query>`. More details are in the app's [routing table](https://github.com/benhoskings/babushka.me/blob/master/config/routes.rb).
+
+Because it's truly anonymous, the results are gameable. Please refrain from taking advantage of that. :)
 
 ## Trust
 
