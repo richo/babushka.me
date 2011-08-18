@@ -20,4 +20,4 @@ The bootstrapper is pretty simple. All it does is install ruby if required (usin
 
 Babushka itself has just one extra requirement alongside `ruby` and `curl`/`wget`, which is `git`. The install process takes care of installing git on your system if you don't already have it. On Linux, babushka will use the system's package manager; on OS X, the binary package from git-scm.com (otherwise installing babushka would require Xcode).
 
-If you'd prefer to install manually or just check out the code, check [http://github.com/benhoskings/babushka](the github page) for the repo URL.
+If you'd prefer to install manually or just check out the code, check [the github page](http://github.com/benhoskings/babushka) for the repo URL.
