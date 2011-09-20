@@ -73,7 +73,7 @@ function welcome {
   echo "Hi there :)"
   echo ""
   echo "So, let's get down to business - first, pulling a tarball of babushka from"
-  echo "http://babushka.me. Then, using it to run \"babushka 'babushka<%= " next" if opts[:next] %>'\", which"
+  echo "http://babushka.me. Then, using it to run \"babushka babushka\", which"
   echo "installs or updates babushka and its dependencies as required."
   echo ""
   if has 'ruby'; then
@@ -128,7 +128,7 @@ function stream_tarball {
 
 function handle_install {
   echo ""
-  ruby "$to/bin/babushka.rb" meet 'babushka<%= " next" if opts[:next] %>' <%= '--defaults' if opts[:hard] %>
+  ruby "$to/bin/babushka.rb" meet babushka <%= 'branch=next' if opts[:next] %> <%= '--defaults' if opts[:hard] %>
   [ $? -eq 0 ]
 }
 
