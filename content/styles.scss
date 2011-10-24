@@ -2,7 +2,7 @@ $leading: 24px;
 $gutter: 36px;
 $nav-width: 160px;
 $article-width: 540px;
-$feature-indent: 100px;
+$feature-width: 360px;
 $background_color: #fff;
 $hover_color: #8e173f;
 $babushka_me_up_color: #333333;
@@ -58,6 +58,11 @@ a {
 
 img {
   border: none;
+}
+
+hr {
+  border: none;
+  border-top: $ruled-line;
 }
 
 h1, h2, h3, p, pre, ul {
@@ -136,25 +141,25 @@ pre, code {
   background-color: #fafafa;
 }
 
-pre {
-  padding: 0.5em 1em;
-  line-height: 1.2;
-}
-
 code {
   display: inline-block;
   padding: 0 0.3em;
 }
 
+pre {
+  padding: 0.5em 1em;
+  line-height: 1.2;
+  code {
+    padding: 0;
+  }
+}
+
 /* the title page */
 body.babushka {
   article {
-    margin-top: 121px;
-    border: $ruled-line;
-    @include radius(4px);
-
-    margin-left: $feature-indent;
-    margin-right: $feature-indent;
-    width: $article-width - ($feature-indent * 2) - 2px;
+    margin-top: 25px;
+    p, pre {
+      width: $feature-width;
+    }
   }
 }
