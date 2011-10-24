@@ -26,7 +26,7 @@ dep 'db backed up' do
   after { log_shell "Removing old sqldumps", %Q{ls -t -1 #{backup_prefix} | tail -n+6 | while read f; do rm "#{backup_prefix}/$f"; done} }
 end
 
-dep 'db migrated' do
+dep 'db migrated', :old_id, :new_id do
   requires_when_unmet 'benhoskings:maintenance page up'
   met? {
     if @run
