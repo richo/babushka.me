@@ -6,9 +6,9 @@ dep 'on deploy' do
   ]
 end
 
-dep 'built', :template => 'benhoskings:task' do
+dep 'built', template: 'benhoskings:task' do
   run {
-    shell "bundle exec nanoc compile", :log => true
+    shell "bundle exec nanoc compile", log: true
   }
 end
 
