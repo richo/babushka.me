@@ -1,9 +1,10 @@
+dep 'before deploy', :old_id, :new_id, :branch, :env do
+  requires 'db backed up'
+end
+
 dep 'on deploy', :old_id, :new_id, :branch, :env do
-  requires [
-    'built',
-    'db backed up',
-    'db migrated'.with(old_id, new_id)
-  ]
+  requires 'built'
+  requires 'db migrated'.with(old_id, new_id)
 end
 
 dep 'built', template: 'benhoskings:task' do
