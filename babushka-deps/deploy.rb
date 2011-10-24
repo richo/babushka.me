@@ -1,8 +1,8 @@
-dep 'on deploy' do
+dep 'on deploy', :old_id, :new_id, :branch, :env do
   requires [
     'built',
     'db backed up',
-    'db migrated'
+    'db migrated'.with(old_id, new_id)
   ]
 end
 
@@ -32,10 +32,9 @@ dep 'db migrated' do
     if @run
       true # done
     else
-      # If the branch was changed, git supplies 0000000 for var(:old_id), so
+      # If the branch was changed, git supplies 0000000 for old_id, so
       # it looks the commit range is 'everything'.
-      old_id = var(:old_id)[/^0+$/] ? '' : var(:old_id)
-      pending = shell("git diff --numstat #{old_id}..#{var(:new_id)}").split("\n").grep(/^[\d\s]+db\/migrate\//)
+      pending = shell("git diff --numstat #{old_id[/^0+$/] ? '' : old_id}..#{new_id}").split("\n").grep(/^[\d\s]+db\/migrate\//)
       if pending.empty?
         log "No new migrations."
         true
