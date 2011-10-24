@@ -18,7 +18,11 @@ Meta deps are defined eagerly, but the template within a meta dep is only run wh
 
 So, you don't need to require any of the `.rb` files from each other in line with dep requires -- lazy dep defining always happens after source loading is complete. At that point all the files have been parsed and required, so babushka has already located all the deps in the source.
 
-## Vars
+## Referencing Deps & Sources
+
+TODO
+
+## Commandline Arguments
 
 TODO
 
