@@ -30,7 +30,8 @@ That little chunk of ruby lets you do this:
       }
     } ✓ public key
 
-Babushka starts with `met?`, which in this case returned something falsey -- a failing test. Next, it called `meet`, which generated a new key, and threw away the return value. And now `met?` returns true-ish, which means that running `meet` made the failing `met?` test pass. Success!
+
+Babushka starts with `met?`, which in this case returned something falsey -- a failing test. Next, it called `meet`, which generated a new key, throwing away the return value. And now `met?` returns true-ish, which means that running `meet` made the failing `met?` test pass. Success!
 
 If we run it a second time, we see this:
 
@@ -41,7 +42,16 @@ If we run it a second time, we see this:
 Babushka starts with the `met?` test like the first time, but since it's already passing now, there's nothing to do.
 
 
+## Self-documenting code
 
 Deps are written in a declarative style, which makes them a good reference too. Reading over the `'public key'` dep above, you check if you have a public key by inspecting `~/.ssh/id_dsa.pub`, and you generate a new one by running `ssh-keygen` with a certain set of options.
 
+
+## Design priorities
+
 I've tried hard to focus on the idea of "no job too small", keeping things lo-fi and trusting the power of unix and git to solve problems for me where it makes sense.
+
+
+## And, yeah...
+
+It's true, babushka means "grandmother" in Russian. The thing is, here in Australia, "babushka doll" is the colloquial term for Russian nesting dolls. Deps are intended to be small, tidy chunks of code, nested within each other - hence the name.
