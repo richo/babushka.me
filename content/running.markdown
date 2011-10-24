@@ -16,7 +16,7 @@ To load the source, babushka requires every .rb file (in an indeterminate order;
 
 Meta deps are defined eagerly, but the template within a meta dep is only run when a dep is (lazily) defined against it.
 
-So, you don't need to require any of the `.rb` files from each other in line with dep requires -- lazy dep defining always happens after source loading is complete, and at that point all the files have been parsed and required.
+So, you don't need to require any of the `.rb` files from each other in line with dep requires -- lazy dep defining always happens after source loading is complete. At that point all the files have been parsed and required, so babushka has already located all the deps in the source.
 
 ## Vars
 
