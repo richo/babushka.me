@@ -20,7 +20,7 @@ Because it's truly anonymous, the results are gameable. Please refrain from taki
 
 ## Trust
 
-Deps can run any ruby code. Since ruby can shell out, a dep can run any code at all. A maliciously written dep could add your machine to a botnet, or email your ssh key to a mobster, or [literally](http://literally.barelyfitz.com/) melt your face off, or anything crafty or untoward you can think of.
+Deps can run any ruby code. Since ruby can shell out, a dep can run any code at all. A maliciously written dep could add your machine to a botnet, or email your ssh key to a mobster, or anything crafty or untoward you can think of.
 
 (This is true of any code you run on your machine. If you run it, you're trusting it.)
 
