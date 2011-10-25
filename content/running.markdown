@@ -2,10 +2,6 @@
 title: Running Deps
 ---
 
-## Community DB
-
-TODO
-
 ## Commandline Syntax
 
 Babushka's commandline syntax is a subcommand & options style, similar to `git` and `gem`. To see the subcommands available, you can run
