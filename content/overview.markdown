@@ -3,8 +3,6 @@ title: Overview
 ---
 
 
-## What's it for?
-
 When you spend time researching something new, it's pretty easy to forget what you found. That means next time, you have to re-research it again.
 
 A lot of the tech jobs we do manually aren't challenging or fun, but they're finicky and have to be done just right -- they're chores. Things that are important to do, but that are better automated than done manually.
