@@ -8,7 +8,42 @@ TODO
 
 ## Commandline Syntax
 
-TODO
+Babushka's commandline syntax is a subcommand & options style, similar to `git` and `gem`. To see the subcommands available, you can run
+
+    $ babushka help
+
+To run deps, use the "meet" subcommand, passing the dep names you're after as arguments. But "meet" is also the default subcommand, so the best way to run deps is to just pass them as arguments, straight up. For example, to run the "rubygems" dep:
+
+    $ babushka rubygems
+
+There are several useful options to use when running deps. The one you'll be after most regularly is `--debug`, which makes babushka much more verbose. In particular, output from long-running shell commands will be printed in realtime.
+
+    $ babushka rubygems --debug
+
+Two other commonly used options for "meet" are `--dry-run`, to check whether deps are met without meeting them, and `--defaults`, to run babushka non-interactively so it doesn't prompt for input at runtime.
+
+For more details on options and arguments, see the "help" output for a specific subcommand:
+
+    $ babushka help meet
+
+You can abberviate subcommands as long as they remain unique. All the subcommands except 'sources' and 'search' can be abbreviated to a single letter without any ambiguity.
+
+
+## The babushka console
+
+Although babushka is predominantly a commandline app, it's not implemented that way. All the commandline functionality is available at a ruby console too:
+
+    $ babushka console
+
+
+## Using babushka as a library
+
+All that does is start an irb session, requiring 'lib/babushka'. Everything will work as expected if you require 'lib/babushka' in a program of your own and then use babushka programatically.
+
+The top-level methods like `dep` and `meta` won't be included by default; you can `include Babushka::DSL` to add them to whatever scope you like.
+
+The only caveat to be aware of is that babushka does monkey-patch some convenience methods onto core classes, like `Array#collapse` and `String#p`. If babushka's primary use was as a library then I wouldn't be patching in this way, but I think it's a worthwhile tradeoff for the concise deps that the patches allow you to write.
+
 
 ## Source Loading
 
