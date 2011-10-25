@@ -33,16 +33,23 @@ In particular, `--dry-run` is not a contract; it's an honour system. A badly wri
 Dep sources are shared using git, so you can rely on their immutability once you've checked the refs, like any git repo.
 
 
+## Dep Locations
+
+There are three standard locations that babushka will search within to find deps.
+
+- The core deps that are bundled with babushka are found at `/usr/local/babushka/deps` (or within the `deps/` directory of your custom install path, if you used one). This is a fixed set of deps; they're the bare minimum required to install babushka itself, along with its dependencies like git, and to check for system stuff like package managers.
+
+- You can put your own personal deps in `~/.babushka/deps`. Babushka will load that path as a source, so the deps within that directory will always be available. There's no need to, but I recommend you make `~/.babushka/deps` a git repo. It's a good idea to use git to manage your personal deps, and if you like, you can push them to github for others to use. (Mine are [here](http://github.com/benhoskings/babushka-deps).)
+
+- The `./babushka-deps/` directory, i.e. within the current directory, will also be loaded as a source. This is a good place to put project-specific deps -- whenever you're in the project's root directory (in the root of a rails project, for example), babushka will make the deps within `babushka-deps/` available.
+
+Babushka will find deps in those locations by default. Other deps -- ones published by other people, for example -- are found in dep sources.
+
+
 ## Dep Sources
 
 A dep source is just a git repo, with some deps in it. There's no structure to a dep source - the `.rb` files within it can have any names and be within any directory structure you like.
 
 As a convention, I tend to keep related deps together in top-level `.rb` files, and use a top-level `templates/` directory for meta deps. But the layout of the files and directories doesn't affect the way babushka makes the deps & templates available, so use whatever convention you like.
 
-## Custom Sources
-
-TODO
-
-## Dep Locations
-
-TODO
+Read more about dep sources, and using the deps they contain, in [the 'running' section](/running).
