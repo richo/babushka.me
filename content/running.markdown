@@ -22,6 +22,28 @@ That runs the dep called 'TextMate.app' in my source, i.e. the source that's fou
 The idea with deps, though, is to make them small and self-contained, specifying each dep's immediate requirements as a list of other deps. Babushka looks up these deps in just the same way as it looks up deps passed on the commandline.
 
 
+## Passing arguments to deps
+
+Deps are, in some ways, like a method call - the outer block of the dep is run at the point the dep is defined, which happens lazily as it is invoked from its parent, or from the commandline if it's the top-level dep.
+
+Like methods, deps can have parameters, and when you call the dep, you can pass values for those parameters, just like supplying arguments to a method call.
+
+There are more details on dep parameters in the section on [writing deps](/writing). For now, the important part is that deps can always accept arguments, whether they're run directly from the commandline, or required from another dep.
+
+To pass arguments on the commandline, use `name=value` pairs:
+
+    $ babushka benhoskings:push! ref=HEAD remote=production
+
+To pass arguments to a dep when you require it, use babushka's `String#with` method.
+
+    dep 'custom nginx config' do
+      requires 'benhoskings:nginx.src'.with(version: '1.0.8')
+      # ...
+    end
+
+You don't have to supply values for a dep's parameters when you call it; dep parameters can be unset, and will lazily prompt for values as required (i.e. at the point babushka attempts to use an unset parameter's value). You can find more details about dep parameters in the [writing deps](/writing) section.
+
+
 ## Commandline Syntax
 
 Babushka's commandline syntax is a subcommand & options style, similar to `git` and `gem`. To see the subcommands available, you can run
@@ -69,9 +91,6 @@ Meta deps are defined eagerly, but the template within a meta dep is only run wh
 
 So, you don't need to require any of the `.rb` files from each other in line with dep requires -- lazy dep defining always happens after source loading is complete. At that point all the files have been parsed and required, so babushka has already located all the deps in the source.
 
-## Commandline Arguments
-
-TODO
 
 ## Logs
 
