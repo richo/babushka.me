@@ -103,4 +103,14 @@ So, you don't need to require any of the `.rb` files from each other in line wit
 
 ## Logs
 
-TODO
+As was mentioned above, the `--debug` option causes babushka to print more verbose information as it runs. Shell commands will print their full output as they run, and babushka will print details about its own operation -- for example, it will print a message as it lazily defines each dep.
+
+If an exception is raised, then by default, babushka prints the exception message, and the step in the backtrace that occurred within your dep, if any. When `--debug` is passed, though, babushka prints the full backtrace.
+
+All this information is too verbose to print all the time, so you'll probably only want to use `--debug` when you're troubleshooting a dep, or hacking on babushka itself. But sometimes it's useful to look at debugging information after the fact, and so babushka always writes the full debug log to `~/.babushka/logs/<dep name>` -- whether `--debug` was passed or not.
+
+You can start viewing the debugging information for a run that's already in progress too, since babushka writes to the log in realtime. If you've started a babushka run, or would like to troubleshoot a long-running process or similar, just follow its debug log with `tail`:
+
+    $ tail -f ~/.babushka/logs/<dep name>
+
+You'll see the full debug log echoed to the terminal as babushka writes it -- just as if you'd originally run babushka with `--debug`.
