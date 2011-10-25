@@ -2,6 +2,26 @@
 title: Running Deps
 ---
 
+Running deps with babushka is simple. The form of the dep names varies depending on where the deps are located, but the way they're run is always the same.
+
+## Referencing Deps & Sources
+
+If the dep you're running is within one of babushka's standard load paths (read about them [here](/finding)), then you can just reference the dep directly.
+
+    $ babushka homebrew
+
+There are many more deps out there, though, which you might like to use ([when you trust them!](/finding)). You can run a dep from any source that's published using babushka's convention automatically:
+
+    $ babushka benhoskings:TextMate.app
+
+That runs the dep called 'TextMate.app' in my source, i.e. the source that's found here:
+
+    http://github.com/benhoskings/babushka-deps
+
+
+The idea with deps, though, is to make them small and self-contained, specifying each dep's immediate requirements as a list of other deps. Babushka looks up these deps in just the same way as it looks up deps passed on the commandline.
+
+
 ## Commandline Syntax
 
 Babushka's commandline syntax is a subcommand & options style, similar to `git` and `gem`. To see the subcommands available, you can run
@@ -48,10 +68,6 @@ To load the source, babushka requires every `.rb` file (in an indeterminate orde
 Meta deps are defined eagerly, but the template within a meta dep is only run when a dep is (lazily) defined against it.
 
 So, you don't need to require any of the `.rb` files from each other in line with dep requires -- lazy dep defining always happens after source loading is complete. At that point all the files have been parsed and required, so babushka has already located all the deps in the source.
-
-## Referencing Deps & Sources
-
-TODO
 
 ## Commandline Arguments
 
