@@ -24,7 +24,7 @@ Deps can run any ruby code. Since ruby can shell out, a dep can run any code at 
 
 (This is true of any code you run on your machine. If you run it, you're trusting it.)
 
-Babushka has no security features at all. This is by design, because the only real type of security is a network of trust. As Linus Torvalds said, "anything else is masturbation".
+Babushka has no security features at all. This is by design, because the only real type of security is a network of trust. Anything else is, [as Linus Torvalds said](http://www.youtube.com/watch?v=4XpnKHJAok8#t=27m36s), masturbation.
 
 The upshot: Only run deps written by people you trust to get them right, or deps whose code you've inspected beforehand.
 
