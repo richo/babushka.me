@@ -8,7 +8,7 @@ To use `babushka.me/up`, all you need is something like `curl` or `wget`, that c
 
     bash -c "`curl babushka.me/up`"
 
-Ubuntu and some other Linux distros have `wget` instead:
+Many Linux distros, including Ubuntu, have `wget` instead:
 
     bash -c "`wget -O - babushka.me/up`"
 
