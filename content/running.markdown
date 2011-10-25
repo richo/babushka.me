@@ -44,6 +44,15 @@ To pass arguments to a dep when you require it, use babushka's `String#with` met
 You don't have to supply values for a dep's parameters when you call it; dep parameters can be unset, and will lazily prompt for values as required (i.e. at the point babushka attempts to use an unset parameter's value). You can find more details about dep parameters in the [writing deps](/writing) section.
 
 
+## Dep source management
+
+When running a dep from a public source, babushka first clones its repo to `~/.babushka/sources/<name>` (or if it's there already, updates it). If you like, though, you can drop any git repo into `~/.babushka/sources/`, and babushka will use it.
+
+In particular, the only time the github URI convention is used is to clone sources that aren't already present in `~/.babushka/sources`. This means you can arrange the git repos within `~/.babushka/sources` however you like, and then use those names whenever you reference deps. Babushka will update the repos from their `origin` remote in the same way - it doesn't mind if you use a custom URI for the remote.
+
+This system is configuration-free and it works reliably - you have total control over where each of your sources point, and babushka will fill in the gaps automatically from the default locations.
+
+
 ## Commandline Syntax
 
 Babushka's commandline syntax is a subcommand & options style, similar to `git` and `gem`. To see the subcommands available, you can run
