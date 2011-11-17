@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1.1'
 gem 'unicorn'
 gem 'pg'
 gem 'hirb'
