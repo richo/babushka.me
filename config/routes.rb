@@ -7,7 +7,8 @@ BabushkaMe::Application.routes.draw do
   match "/up", :to => "bootstrap#up", :via => :get, :format => :sh
   match "/up/:opts", :to => "bootstrap#up", :via => :get, :format => :sh
 
-  match '/docs' => redirect("http://rubydoc.info/github/benhoskings/babushka/master/frames")
+  match '/docs' => redirect("/")
+  match '/rdoc' => redirect("http://rubydoc.info/github/benhoskings/babushka/master/frames")
   match '/mailing_list' => redirect("http://groups.google.com/group/babushka_app")
 
   match "/refs/heads/:refname" => redirect("http://github.com/benhoskings/babushka/tree/%{refname}"), refname: /[0-9a-z_\-\.]+/i
