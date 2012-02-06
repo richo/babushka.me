@@ -27,8 +27,8 @@ Here are a couple of examples using those options.
 
 Even though babushka is a ruby application, there's no gem distribution. The reason for this is that setting up a particular ruby build, rubygems, and maybe rvm or rbenv along the way is just the kind of thing babushka is good at. So in the interests of consistency, there's just one install method, which doesn't require anything other than something like `curl` or `wget`.
 
-The bootstrapper is pretty simple. All it does is install ruby if required (using the system's package manager; OS X systems already have ruby installed), download a tarball of babushka, and run `babushka babushka`, which kicks off a built-in recipe that installs babushka for real. Meta, eh?
-
 Babushka itself has just one extra requirement alongside `ruby` and `curl`/`wget`, which is `git`. The install process takes care of installing git on your system if you don't already have it. On Linux, babushka will use the system's package manager; on OS X, the binary package from git-scm.com (otherwise installing babushka would require Xcode).
+
+The bootstrapper is pretty simple. All it does is install ruby and git as required (using the system's package manager; recent OS X systems already have both installed), download a tarball of babushka, and run `babushka babushka`, which kicks off a built-in recipe that installs babushka for real. Meta, eh?
 
 If you'd prefer to install manually or just check out the code, check [the github page](http://github.com/benhoskings/babushka) for the repo URL.
