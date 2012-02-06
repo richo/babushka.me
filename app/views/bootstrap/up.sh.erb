@@ -6,7 +6,7 @@
 # So: write a string in which ~$(whoami) is expanded, and run it in a subshell.
 home=$(sh -c "echo ~$(whoami)")
 
-from="http://babushka.me/tarballs/babushka.tgz"
+from="https://nodeload.github.com/benhoskings/babushka/tarball/master"
 to="$home/.babushka/bootstrap"
 
 function true_with { echo -e "\n$1"; true; }
