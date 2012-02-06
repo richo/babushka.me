@@ -14,7 +14,18 @@ Many Linux distros, including Ubuntu, have `wget` instead:
 
 It's a nice way to kick things off on a new server, or on your new laptop, since it can literally be the first command you run on the machine. In a few commands' time you can have your commandline all set up, or your favourite apps installed, or whatever other task you write a recipe for.
 
-Even though babushka is a ruby application, there's no gem distribution. The reason for this is that setting up a particular ruby build, rubygems, and maybe rvm along the way is just the kind of thing babushka is good at. So in the interests of consistency, there's just one install method, which doesn't require anything other than something like `curl` or `wget`.
+You can pass comma-separated options to `babushka.me/up` to customise the install. There are two that are currently supported:
+
+- `next`, to checkout the latest code on the 'next' branch instead of the stable 'master' one;
+- `hard`, to run the installer without asking for any input or confirmation, which is useful when scripting the install.
+
+Here are a couple of examples using those options.
+
+    bash -c "`curl babushka.me/up/hard`"
+
+    bash -c "`wget -O - babushka.me/up/next,hard`"
+
+Even though babushka is a ruby application, there's no gem distribution. The reason for this is that setting up a particular ruby build, rubygems, and maybe rvm or rbenv along the way is just the kind of thing babushka is good at. So in the interests of consistency, there's just one install method, which doesn't require anything other than something like `curl` or `wget`.
 
 The bootstrapper is pretty simple. All it does is install ruby if required (using the system's package manager; OS X systems already have ruby installed), download a tarball of babushka, and run `babushka babushka`, which kicks off a built-in recipe that installs babushka for real. Meta, eh?
 
