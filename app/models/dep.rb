@@ -7,7 +7,9 @@ class Dep < ActiveRecord::Base
   validates_presence_of :source, :name
   validates_uniqueness_of :name, :scope => :source_id
 
-  scope :search, lambda {|term| where(["name ILIKE ?", "%#{term}%"]) }
+  def self.search term
+    where "name ILIKE ?", "%#{term}%"
+  end
 
   def runs_this_week
     runs.this_week.count
