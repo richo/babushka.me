@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This one is rendered per-request by the babushka webservice.
+deprecated_hard=<%= deprecated_hard %>
+
 # Can't use $HOME, because sometimes it's not set.
 # Can't use ~, because it depends on $HOME to expand.
 # Can't use ~$(whoami) directly, because it doesn't expand inline.
@@ -44,6 +47,14 @@ function install_ruby {
     yum) yum -y install ruby ;;
     *)
   esac
+}
+
+function warn_about_deprecated_hard {
+  if [ $deprecated_hard ]; then
+    echo ""
+    echo "### The 'hard' option is deprecated. Instead, just use the plain"
+    echo "### babushka.me/up -- it only prompts when run on a terminal now."
+  fi
 }
 
 function logo {
@@ -187,6 +198,7 @@ function do_bootstrap {
   handle_install && on_install_success || on_install_failure
 }
 
+warn_about_deprecated_hard
 logo
 if check; then
   if welcome; then

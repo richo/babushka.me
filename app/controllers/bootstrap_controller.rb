@@ -7,7 +7,7 @@ class BootstrapController < ApplicationController
       render :status => 400, :text => "The options #{invalid_opts.inspect} aren't recognised. The valid ones are #{VALID_OPTS.inspect}."
     else
       opts = Hash[*opt_list.map {|i| [i.to_sym, true] }.flatten]
-      render :action => 'up', :layout => false, :locals => {:opts => opts}
+      render :action => 'up', :layout => false, :locals => {:opts => opts, :deprecated_hard => opts[:hard]}
     end
   end
 end
