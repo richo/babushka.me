@@ -9,6 +9,8 @@ home=$(sh -c "echo ~$(whoami)")
 from="https://nodeload.github.com/benhoskings/babushka/tarball/<%= opts[:next] ? 'next' : 'master' %>"
 to="$home/.babushka/bootstrap"
 
+interactive=$([ -t 0 ] && echo 'true')
+
 function true_with { echo -e "\n$1"; true; }
 function false_with { echo -e "\n$1"; false; }
 
@@ -82,12 +84,13 @@ function welcome {
     echo "You don't have ruby installed, so we'll take care of that first (using $(pkg_manager))."
   fi
   echo ""
-  <% if opts[:hard] %>
-  true
-  <% else %>
-  read -p "Sound good? [y/N] " f
-  [[ "$f" == y* ]] || [[ "$f" == Y* ]]
-  <% end %>
+
+  if [ "$interactive" = 'true' ]; then
+    read -p "Sound good? [y/N] " f
+    [[ "$f" == y* ]] || [[ "$f" == Y* ]]
+  else
+    true
+  fi
 }
 
 function install_ruby_if_required {
@@ -128,7 +131,7 @@ function stream_tarball {
 
 function handle_install {
   echo ""
-  ruby "$to/bin/babushka.rb" meet babushka <%= 'branch=next' if opts[:next] %> <%= '--defaults' if opts[:hard] %>
+  ruby "$to/bin/babushka.rb" meet babushka <%= 'branch=next' if opts[:next] %> $([ "$interactive" = 'true' ] || echo '--defaults')
   [ $? -eq 0 ]
 }
 
@@ -187,7 +190,7 @@ function do_bootstrap {
 logo
 if check; then
   if welcome; then
-    echo "<%= opts[:hard] ? "Let\'s do this." : "Excellent." %>"
+    [ "$interactive" = 'true' ] && echo "Excellent." || echo "Let's do this."
     echo ""
     do_bootstrap
   else
