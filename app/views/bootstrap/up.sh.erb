@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# This one is rendered per-request by the babushka webservice.
+# These two are rendered per-request by the babushka webservice.
+ref=<%= ref %>
 deprecated_hard=<%= deprecated_hard %>
 
 # Can't use $HOME, because sometimes it's not set.
@@ -9,7 +10,7 @@ deprecated_hard=<%= deprecated_hard %>
 # So: write a string in which ~$(whoami) is expanded, and run it in a subshell.
 home=$(sh -c "echo ~$(whoami)")
 
-from="https://nodeload.github.com/benhoskings/babushka/tarball/<%= opts[:next] ? 'next' : 'master' %>"
+from="https://nodeload.github.com/benhoskings/babushka/tarball/$ref"
 to="$home/.babushka/bootstrap"
 
 interactive=$([ -t 0 ] && echo 'true')
@@ -142,7 +143,7 @@ function stream_tarball {
 
 function handle_install {
   echo ""
-  ruby "$to/bin/babushka.rb" meet babushka <%= 'branch=next' if opts[:next] %> $([ "$interactive" = 'true' ] || echo '--defaults')
+  ruby "$to/bin/babushka.rb" meet babushka branch="$ref" $([ "$interactive" = 'true' ] || echo '--defaults')
   [ $? -eq 0 ]
 }
 

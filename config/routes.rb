@@ -5,7 +5,7 @@ BabushkaMe::Application.routes.draw do
   match '/a_new_tarball', :to => 'babushka#tarball', :via => :post
 
   match "/up", :to => "bootstrap#up", :via => :get, :format => :sh
-  match "/up/:opts", :to => "bootstrap#up", :via => :get, :format => :sh
+  match "/up/:ref", :to => "bootstrap#up", :via => :get, :format => :sh, :ref =>  /[^\/]*/
 
   match '/docs' => redirect("/")
   match '/rdoc' => redirect("http://rubydoc.info/github/benhoskings/babushka/master/frames")
