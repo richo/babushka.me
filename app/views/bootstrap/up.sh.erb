@@ -96,11 +96,19 @@ function welcome {
   echo "http://babushka.me. Then, using it to run \"babushka babushka\", which"
   echo "installs or updates babushka and its dependencies as required."
   echo ""
-  if has 'ruby'; then
-    echo "You already have ruby $(ruby --version | awk '{print $2}'), so you're all set."
+
+  if has 'curl' || has 'wget'; then
+    echo "- You already have $(has 'curl' && echo 'curl' || echo 'wget')."
   else
-    echo "You don't have ruby installed, so we'll take care of that first (using $(pkg_manager))."
+    echo "- You don't have curl (or wget) installed, so we'll install curl first (using $(pkg_manager))."
   fi
+
+  if has 'ruby'; then
+    echo "- You already have ruby $(ruby --version | awk '{print $2}')."
+  else
+    echo "- You don't have ruby installed, so we'll install it (using $(pkg_manager))."
+  fi
+
   echo ""
 
   if [ "$interactive" = 'true' ]; then
