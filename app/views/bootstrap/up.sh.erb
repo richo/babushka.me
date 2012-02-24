@@ -109,9 +109,8 @@ function welcome {
     echo "- You don't have ruby installed, so we'll install it (using $(pkg_manager))."
   fi
 
-  echo ""
-
   if [ "$interactive" = 'true' ]; then
+    echo ""
     read -p "Sound good? [y/N] " f
     [[ "$f" == y* ]] || [[ "$f" == Y* ]]
   else
