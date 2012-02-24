@@ -134,6 +134,8 @@ function create_install_dir {
 }
 
 function stream_tarball {
+  echo ""
+  echo "Right, downloading a tarball of babushka $ref."
   if has 'curl'; then
     curl -L -\# "$from" | tar -zxf - --strip-components 1
   elif has 'wget'; then
@@ -142,6 +144,7 @@ function stream_tarball {
 }
 
 function handle_install {
+  echo "Invoking babushka $(cd "$to" && babushka --version) to handle the install."
   echo ""
   ruby "$to/bin/babushka.rb" meet babushka branch="$ref" $([ "$interactive" = 'true' ] || echo '--defaults')
   [ $? -eq 0 ]
@@ -203,8 +206,6 @@ warn_about_deprecated_hard
 logo
 if check; then
   if welcome; then
-    [ "$interactive" = 'true' ] && echo "Excellent." || echo "Let's do this."
-    echo ""
     do_bootstrap
   else
     echo ""
