@@ -39,13 +39,13 @@ function update_manager {
   esac
 }
 
-function install_ruby {
+function install_pkgs {
   case $(pkg_manager) in
-    apt-get) apt-get install -qqy ruby ;;
-    aptitude) aptitude -y install ruby ;;
-    brew) brew install ruby ;;
-    pacman) pacman -Syq --noconfirm --noprogressbar ruby ;;
-    yum) yum -y install ruby ;;
+    apt-get) apt-get install -qqy $1 ;;
+    aptitude) aptitude -y install $1 ;;
+    brew) brew install $1 ;;
+    pacman) pacman -Syq --noconfirm --noprogressbar $1 ;;
+    yum) yum -y install $1 ;;
     *)
   esac
 }
@@ -119,17 +119,20 @@ function welcome {
   fi
 }
 
-function install_ruby_if_required {
-  if has 'ruby'; then
+function install_pkgs_if_required {
+  if has 'ruby' && (has 'curl' || has 'wget'); then
     true # already installed
   else
-    echo "First we need to install ruby (via $(pkg_manager))."
+    pkgs="$(has 'curl' || has 'wget' || echo 'curl') $(has 'ruby' || echo 'ruby')"
+    echo "First we need to install $(echo $pkgs | sed 's/ / \& /') (via $(pkg_manager))."
     update_manager
-    install_ruby
-    if ! has 'ruby'; then
-      false_with "Argh, the ruby install failed."
+    install_pkgs "$pkgs"
+    if ! has 'ruby' || ! has 'curl'; then
+      false_with "Argh, the install failed."
     else
-      true_with "Nice, ruby $(ruby --version | awk '{print $2}') was installed at $(which ruby)."
+      echo "- ruby $(ruby --version | awk '{print $2}') is present at $(which ruby)."
+      echo "- curl is present at $(which curl)."
+      true
     fi
   fi
 }
@@ -210,7 +213,7 @@ function on_install_failure {
 }
 
 function do_bootstrap {
-  install_ruby_if_required &&
+  install_pkgs_if_required &&
   create_install_dir &&
   stream_tarball &&
   handle_install && on_install_success || on_install_failure
