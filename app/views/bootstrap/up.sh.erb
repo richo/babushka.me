@@ -67,11 +67,11 @@ function logo {
 }
 
 function check {
-  if ! has 'curl' && ! has 'wget'; then
+  if ! has 'curl'; then
     if ! has $(pkg_manager); then
-      false_with "Sorry, you don't have curl or wget installed, and I couldn't find\na package manager I recognise."
+      false_with "Sorry, you don't have curl installed, and I couldn't find\na package manager I recognise."
     elif [ $(whoami) != 'root' ] && [ $(pkg_manager) != 'brew' ]; then
-      false_with "You don't have curl or wget installed. I can install curl via $(pkg_manager),\nbut only when running as root."
+      false_with "You don't have curl installed. I can install it via $(pkg_manager),\nbut only when running as root."
     else
       true
     fi
@@ -97,10 +97,10 @@ function welcome {
   echo "installs or updates babushka and its dependencies as required."
   echo ""
 
-  if has 'curl' || has 'wget'; then
-    echo "- You already have $(has 'curl' && echo 'curl' || echo 'wget')."
+  if has 'curl'; then
+    echo "- You already have curl."
   else
-    echo "- You don't have curl (or wget) installed, so we'll install curl first (using $(pkg_manager))."
+    echo "- You don't have curl installed, so we'll install it first (using $(pkg_manager))."
   fi
 
   if has 'ruby'; then
@@ -119,14 +119,14 @@ function welcome {
 }
 
 function install_pkgs_if_required {
-  if has 'ruby' && (has 'curl' || has 'wget'); then
+  if has 'ruby' && has 'curl'; then
     true # already installed
   else
-    pkgs="$(has 'curl' || has 'wget' || echo 'curl') $(has 'ruby' || echo 'ruby')"
+    pkgs="$(has 'curl' || echo 'curl') $(has 'ruby' || echo 'ruby')"
     echo "First we need to install $(echo $pkgs | sed 's/ / \& /') (via $(pkg_manager))."
     update_manager
     install_pkgs "$pkgs"
-    if ! has 'ruby' || (! has 'curl' && ! has 'wget'); then
+    if ! has 'ruby' || ! has 'curl'; then
       false_with "Argh, the install failed."
     else
       echo "- ruby $(ruby --version | awk '{print $2}') is present at $(which ruby)."
@@ -152,11 +152,7 @@ function create_install_dir {
 function stream_tarball {
   echo ""
   echo "Right, downloading a tarball of babushka $ref."
-  if has 'curl'; then
-    curl -L -\# "$from" | tar -zxf - --strip-components 1
-  elif has 'wget'; then
-    wget --progress=bar "$from" -O - | tar -zxf - --strip-components 1
-  fi
+  curl -L -\# "$from" | tar -zxf - --strip-components 1
 }
 
 function handle_install {
