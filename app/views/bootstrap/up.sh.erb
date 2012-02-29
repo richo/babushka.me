@@ -126,7 +126,7 @@ function install_pkgs_if_required {
     echo "First we need to install $(echo $pkgs | sed 's/ / \& /') (via $(pkg_manager))."
     update_manager
     install_pkgs "$pkgs"
-    if ! has 'ruby' || ! has 'curl'; then
+    if ! has 'ruby' || (! has 'curl' && ! has 'wget'); then
       false_with "Argh, the install failed."
     else
       echo "- ruby $(ruby --version | awk '{print $2}') is present at $(which ruby)."
