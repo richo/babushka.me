@@ -126,12 +126,14 @@ function install_pkgs_if_required {
     true # already installed
   else
     pkgs="$(has 'curl' || echo 'curl') $(has 'ruby' || echo 'ruby')"
+    echo ""
     echo "First we need to install $(echo $pkgs | sed 's/ / \& /') (via $(pkg_manager))."
     update_manager
     install_pkgs "$pkgs"
     if ! has 'ruby' || ! has 'curl'; then
       false_with "Argh, the install failed."
     else
+      echo ""
       echo "- ruby $(ruby --version | awk '{print $2}') is present at $(which ruby)."
       echo "- curl is present at $(which curl)."
       true
