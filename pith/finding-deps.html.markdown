@@ -7,7 +7,7 @@ title: Finding deps
 
 Whenever a public dep is run with babushka, the result is recorded anonymously in a public database at babushka.me. You can query this database using babushka's `search` subcommand: it returns a list of matching deps, along with a measure of their popularity and reliability.
 
-A public dep is a dep whose source has a public URL -- something like `git://` or `http://`. There's more information on dep sources in the [running](/running) section, but for now: a dep is public when you run it directly from someone's public source; otherwise, it's probably private.
+A public dep is a dep whose source has a public URL -- something like `git://` or `http://`. There's more information dep sources [here](/dep-sources), but for now: a dep is public when you run it directly from someone's public source; otherwise, it's probably private.
 
 To find, say, deps about coffee, run this command:
 
@@ -44,13 +44,5 @@ There are three standard locations that babushka will search within to find deps
 
 - The `./babushka-deps/` directory, i.e. within the current directory, will also be loaded as a source, named `current dir`. This is a good place to put project-specific deps -- whenever you're in the project's root directory (in the root of a rails project, for example), babushka will make the deps within `babushka-deps/` available.
 
-Babushka will find deps in those locations by default. Other deps -- ones published by other people, for example -- are found in dep sources.
+Babushka will find deps in those locations by default. Other deps -- ones published by other people, for example -- are found in [dep sources](/dep-sources).
 
-
-## Dep Sources
-
-A dep source is just a git repo, with some deps in it. There's no structure to a dep source - the `.rb` files within it can have any names and be within any directory structure you like.
-
-As a convention, I tend to keep related deps together in top-level `.rb` files, and use a top-level `templates/` directory for meta deps. But the layout of the files and directories doesn't affect the way babushka makes the deps & templates available, so use whatever convention you like.
-
-Read more about dep sources, and using the deps they contain, in [the 'running' section](/running).

@@ -4,11 +4,11 @@ title: Babushka
 ---
 
 Babushka is a tool for
-[finding](/finding),
-[running](/running),
-[writing](/writing)
+[finding](/finding-deps),
+[running](/running-deps),
+[writing](/writing-deps)
 and
-[sharing](/sharing)
+[sharing](/sharing-deps)
 recipies to automate things.
 
 <hr />
