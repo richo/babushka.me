@@ -7,9 +7,9 @@ dep 'on deploy', :old_id, :new_id, :branch, :env do
   requires 'db migrated'.with(old_id, new_id)
 end
 
-dep 'built', template: 'benhoskings:task' do
+dep 'built', template: 'task' do
   run {
-    shell "bundle exec nanoc compile", log: true
+    shell "bundle exec pith -i site/ -o ../public/ build", :cd => 'pith', :log => true
   }
 end
 
