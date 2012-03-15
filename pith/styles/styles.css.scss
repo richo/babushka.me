@@ -65,6 +65,10 @@ hr {
   border-top: $ruled-line;
 }
 
+ul {
+  padding-left: 2ex;
+}
+
 h1, h2, h3, p, pre, ul {
   margin: $leading 0;
 }
@@ -102,6 +106,9 @@ body >article,
 body >nav {
   float: left;
   padding: 0 $gutter;
+}
+
+body >nav {
   h2 {
     margin-bottom: 0;
   }
