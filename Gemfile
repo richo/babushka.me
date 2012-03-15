@@ -6,3 +6,8 @@ gem 'pg'
 gem 'hirb'
 gem 'delayed_job'
 gem 'newrelic_rpm'
+
+gem 'pith'
+gem 'haml'
+gem 'sass'
+gem 'redcarpet'

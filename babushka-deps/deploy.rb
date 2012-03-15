@@ -9,7 +9,7 @@ end
 
 dep 'built', template: 'task' do
   run {
-    shell "bundle exec pith -i site/ -o ../public/ build", :cd => 'pith', :log => true
+    shell "bundle exec pith -i pith/ -o public/ build", :log => true
   }
 end
 
