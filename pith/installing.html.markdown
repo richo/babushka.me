@@ -5,13 +5,17 @@ title: Installing babushka
 
 You can install babushka on your system, no matter what state it's in, using `babushka.me/up`. That's a script that knows enough to install ruby if required (babushka's only runtime dependency), and then download a temporary babushka that knows how to do the proper install.
 
-To use `babushka.me/up`, all you need is something like curl or wget, that can fetch over http. Mac OS X and some Linux distros have `curl`:
+All you need is something that can fetch over https. Mac OS X and some Linux distros ship with `curl`:
 
-    bash -c "`curl babushka.me/up`"
+    bash -c "`curl https://babushka.me/up`"
 
-Some other Linux distros have `wget` instead:
+Some other Linux distros have `wget` instead. Linux VPSes with only `wget` installed usually don't have `openssl`, which isn't ideal. You could install curl first (which should pull in openssl):
 
-    bash -c "`wget -O - babushka.me/up`"
+    apt-get install -y curl && bash -c "`curl https://babushka.me/up`"
+
+Or just cowboy it over `http://` with wget.
+
+    bash -c "`wget -O - babushka.me/up`" # Hijack me, please!
 
 
 ## What it does
