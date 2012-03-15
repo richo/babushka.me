@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title><%= @item[:title] %> - babushka</title>
+    <title><%= page.meta['title'] %> - babushka</title>
     <link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" media="screen">
     <meta name="generator" content="nanoc 3.1.6">
@@ -28,7 +28,7 @@
       })();
     </script>
   </head>
-  <body class="<%= @item[:title].downcase.gsub(' ', '-').gsub(/[^a-z\-]/, '') %>">
+  <body class="<%= page.meta['title'].downcase.gsub(' ', '-').gsub(/[^a-z\-]/, '') %>">
     <aside role="contentinfo">
       <a class="ref" rel="external" href="https://github.com/benhoskings/babushka.me/commit/<%= git_ref %>"><%= git_ref %></a>
     </aside>
@@ -69,8 +69,8 @@
       </ul>
     </nav>
     <article>
-      <% unless @item[:title] == 'Babushka' %>
-        <h1><%= @item[:title] %></h1>
+      <% unless page.meta['title'] == 'Babushka' %>
+        <h1><%= page.meta['title'] %></h1>
       <% end %>
       <%= yield %>
     </article>

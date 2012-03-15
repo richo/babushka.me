@@ -1,4 +1,5 @@
 ---
+layout: "/_layout.html.erb"
 title: Writing Your Own Deps
 ---
 

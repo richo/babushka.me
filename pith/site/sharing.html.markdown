@@ -1,4 +1,5 @@
 ---
+layout: "/_layout.html.erb"
 title: Sharing Your Deps
 ---
 
