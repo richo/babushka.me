@@ -37,11 +37,11 @@ Dep sources are shared using git, so you can rely on their immutability once you
 
 There are three standard locations that babushka will search within to find deps.
 
-- The core deps that are bundled with babushka are found at `/usr/local/babushka/deps` (or within the `deps/` directory of your custom install path, if you used one). This is a fixed set of deps; they're the bare minimum required to install babushka itself, along with its dependencies like git, and to check for system stuff like package managers.
+- The core deps that are bundled with babushka are found at `/usr/local/babushka/deps` (or within the `deps/` directory of your custom install path, if you used one). This is a fixed set of deps; they're the bare minimum required to install babushka itself, along with its dependencies like git, and to check for system stuff like package managers. This source is called `core`.
 
-- You can put your own personal deps in `~/.babushka/deps`. Babushka will load that path as a source, so the deps within that directory will always be available. There's no need to, but I recommend you make `~/.babushka/deps` a git repo. It's a good idea to use git to manage your personal deps, and if you like, you can push them to github for others to use. (Mine are [here](http://github.com/benhoskings/babushka-deps).)
+- You can put your own personal deps in `~/.babushka/deps`. Babushka will load that path as the a source called `personal`, so the deps within that directory will always be available. There's no need to, but I recommend you make `~/.babushka/deps` a git repo. It's a good idea to use git to manage your personal deps, and if you like, you can push them to github for others to use. (Mine are [here](http://github.com/benhoskings/babushka-deps).)
 
-- The `./babushka-deps/` directory, i.e. within the current directory, will also be loaded as a source. This is a good place to put project-specific deps -- whenever you're in the project's root directory (in the root of a rails project, for example), babushka will make the deps within `babushka-deps/` available.
+- The `./babushka-deps/` directory, i.e. within the current directory, will also be loaded as a source, named `current dir`. This is a good place to put project-specific deps -- whenever you're in the project's root directory (in the root of a rails project, for example), babushka will make the deps within `babushka-deps/` available.
 
 Babushka will find deps in those locations by default. Other deps -- ones published by other people, for example -- are found in dep sources.
 
