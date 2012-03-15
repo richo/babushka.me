@@ -23,30 +23,30 @@ Here's a babushka dep, at its most generic.
       }
     end
 
+`met?` should be an idempotent block of code that returns true if the dep is "met" -- that is, if its job is already done.
+
+`meet` shouldn't check anything at all: it should do the dep's job unconditionally. Its return value is ignored.
+
 The interaction between `met?` and `meet` defines babushka.
 
-`met?` is an idempotent block of code that returns true if the dep is "met" -- that is, if its job is already done.
 
-`meet` does the dep's job unconditionally. Its return value is ignored.
+## met? / meet / met?
 
-
-## How met? and meet behave
-
-When a dep is run, its `met?` block is called. If it returns true, then there's nothing to do.
+When a dep is run, its `met?` block is called. If it returns true, then the dep's job is done.
 
 If it's unmet, though, then `meet` is run (and its return value ignored), and then `met?` is run again to see if running meet caused the dep to become met.
 
-The idea is that `met?` and `meet` are separate concerns: running `meet` to cause `met?` to return true is like adding the code to make a failing test pass.
+The idea is that `met?` and `meet` are complementary: `met?`'s job is checking whether `meet` has done its job properly.
 
-This implies an important part of the design: the `met?` block shouldn't just directly check that `meet` did a piece of work -- it should check for the result of that work. For example:
+I like to think of an unmet dep's `met?` block as a failing test, and `meet` as the code that makes that test pass.
+
+
+## What, not how
+
+This implies an important part of the design: the `met?` block shouldn't just directly check that `meet` did a piece of work; that would just be trivial repetition. Instead, A good test checks the _result_ of the work. For example:
 
 - If `meet` starts the webserver, then `met?` should check there's something listening on port 80.
 - If `meet` bundles your app, then `met?` should run `bundle --check`.
 - If `meet` exports a variable in your shell config, then `met?` should fork a shell and check it's set.
 
-
-## Think of it like writing tests
-
-If `meet` is the bit you'd write anyway, in a rake task, say, then `met?` is the corresponding test. There are a few implications
-
-The idea is to keep a clean separation between `met?` and `meet`: the code in `met?` should do nothing except just check whether the dep is met and return a boolean, and `meet` should unconditionally satisfy the dep without doing any checks.
+In short, `met?` should check `meet`'s intent, not its implementation: it should check the what, not the how.
