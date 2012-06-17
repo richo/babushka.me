@@ -45,10 +45,6 @@ body {
   padding-top: $leading;
 }
 
-pre {
-  overflow-x: auto;
-}
-
 a {
   text-decoration: none;
   &:link, &:visited {
@@ -148,18 +144,11 @@ body > nav {
   }
 }
 
-pre, code {
+pre {
   @include radius(3px);
   @include textured;
+  overflow-x: auto;
   background-color: #fafafa;
-}
-
-code {
-  display: inline-block;
-  padding: 0 0.3em;
-}
-
-pre {
   padding: 0.5em 1em;
   line-height: 1.2;
   code {
