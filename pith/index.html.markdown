@@ -9,7 +9,7 @@ Babushka is a tool for
 [writing](/writing-deps)
 and
 [sharing](/sharing-deps)
-recipies to automate things.
+recipes to automate things.
 
 <hr />
 
