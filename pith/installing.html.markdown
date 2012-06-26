@@ -9,7 +9,7 @@ All you need is something that can fetch over https. Mac OS X and some Linux dis
 
     bash -c "`curl https://babushka.me/up`"
 
-Some other Linux distros have `wget` instead. Linux VPSes with only `wget` installed usually don't have `openssl`, which isn't ideal. You could install curl first (which should pull in openssl):
+Some other Linux distros have `wget` instead. Linux VPSes with only `wget` installed usually don't have openssl, which means no https downloads. You could install curl first (which should pull in openssl):
 
     apt-get install -y curl && bash -c "`curl https://babushka.me/up`"
 
