@@ -1,6 +1,5 @@
 $fonts: Menlo, Monaco, monospace;
 $leading: 24px;
-$gutter: 36px;
 $nav-width: 160px;
 $article-width: 540px;
 $feature-width: 360px;
@@ -43,9 +42,7 @@ body {
   line-height: $leading;
   font-family: $fonts;
   background: white;
-  width: $gutter + $nav-width + $gutter + $gutter + $article-width + $gutter;
   margin: 0 auto;
-  padding-top: $leading;
 }
 
 a {
@@ -91,59 +88,64 @@ h2 {
 }
 
 body > aside {
-  position: fixed;
-  top: 0; right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
   padding: 0.2em 0.5em;
-  background-color: rgba(255,255,255,0.67);
   z-index: 10;
   &:before {
     content: '↪';
   }
 }
 
-body >article,
-body >nav {
-  float: left;
-  padding: 0 $gutter;
+body >nav,
+body >article {
+  padding-left: $leading;
 }
 
 body >nav {
-  h2 {
-    margin-bottom: 0;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #aaa;
+  padding-top: $leading;
+  list-style: none;
+
+  section {
+    float: left;
+    margin-right: $leading;
+    margin-bottom: $leading;
+    h1, h2 {
+      margin: 0;
+    }
+    p {
+      margin: 0;
+      a {
+        display: block;
+      }
+    }
   }
-  ul {
-    margin-top: 0;
-  }
+  overflow: hidden;
 }
 
-body > article {
+body >article {
   width: $article-width;
   li {
     list-style-type: square;
   }
 }
 
-body > nav {
-  width: $nav-width;
-  text-align: right;
+body >nav {
   h1 {
     @include clearfix;
     a {
       display: block;
       img {
         display: block;
-        float: right;
         height: 88px;
-        margin-right: -15px;
-        margin-bottom: 10px;
       }
     }
   }
   h2 {
     color: #333333;
-  }
-  ul {
-    list-style-type: none;
   }
 }
 

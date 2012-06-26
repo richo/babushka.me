@@ -30,44 +30,35 @@
       %a.ref{:href => "https://github.com/benhoskings/babushka.me/commit/#{git_ref}", :rel => "external"}= git_ref
 
     %nav
-      %h1
-        %a(href="/")
-          %img{:alt => "babushka logo", :src => "/images/babushka.png"}/
-      %h2 Hello
-      %ul
-        %li
+      %section
+        %h1
+          %a(href="/")
+            %img{:alt => "babushka logo", :src => "/images/babushka.png"}/
+      %section
+        %h2 Hello
+        %p
           %a(href="/overview") Overview
-        %li
           %a(href="/installing") Installing
-      %h2 Documentation
-      %ul
-        %li
+      %section
+        %h2 Documentation
+        %p
           %a(href="/running-babushka") Running babushka
-        %li
           %a(href="/finding-deps") Finding deps
-        %li
           %a(href="/dep-sources") Dep sources
-        %li
           %a(href="/running-deps") Running deps
-        %li
           %a(href="/how-deps-work") How deps work
-        %li
           %a(href="/writing-deps") Writing deps
-        %li
           %a(href="/sharing-deps") Sharing deps
-      %h2 Reference
-      %ul
-        %li
+      %section
+        %h2 Reference
+        %p
           %a(href="http://rubydoc.info/github/benhoskings/babushka/master/frames") yardoc
-        %li
           %a(href="http://github.com/benhoskings/babushka") github
-      %h2 Community
-      %ul
-        %li
+      %section
+        %h2 Community
+        %p
           %a(href="http://twitter.com/babushka_app") @babushka_app
-        %li
           %a(href="http://groups.google.com/group/babushka_app/topics") Mailing List
-        %li
           %a(href="irc://chat.freenode.net/#babushka") #babushka on freenode
 
     %article
