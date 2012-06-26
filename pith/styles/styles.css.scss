@@ -1,3 +1,4 @@
+$fonts: Menlo, Monaco, monospace;
 $leading: 24px;
 $gutter: 36px;
 $nav-width: 160px;
@@ -35,10 +36,12 @@ abbr,article,aside,canvas,figure,footer,header,hgroup,nav,section {
 * {
   margin: 0;
   padding: 0;
-  font: 13px/#{$leading} Menlo, Monaco, monospace;
 }
 
 body {
+  font-size: 13px;
+  line-height: $leading;
+  font-family: $fonts;
   background: white;
   width: $gutter + $nav-width + $gutter + $gutter + $article-width + $gutter;
   margin: 0 auto;
@@ -157,6 +160,7 @@ pre {
 }
 
 code {
+  font-family: $fonts;
   font-weight: bold;
 }
 
