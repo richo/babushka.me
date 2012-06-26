@@ -119,6 +119,10 @@ body >nav {
     p {
       margin: 0;
       a {
+        color: #777;
+        &:link, &:visited {
+          color: #777;
+        }
         display: block;
         font-size: 12px;
       }
