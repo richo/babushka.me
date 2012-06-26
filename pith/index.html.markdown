@@ -18,4 +18,4 @@ Here's an [overview](/overview) if you're new.
 Check out the [installation guide](/installing)
 to get going. Or, if you know what you're doing already, just:
 
-    bash -c "`curl babushka.me/up`"
+    bash -c "`curl https://babushka.me/up`"
