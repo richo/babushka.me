@@ -109,6 +109,15 @@ body >nav {
   padding-top: $leading;
   list-style: none;
 
+  position: relative;
+  section.doll {
+    width: 75px;
+    h1 a {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
   section {
     float: left;
     margin-right: $leading;
