@@ -3,7 +3,7 @@ $leading: 24px;
 $nav-width: 160px;
 $doll-width: 75px;
 $layout-width: 760px;
-$feature-width: 360px;
+$feature-width: 380px;
 $background_color: #f4f4f4;
 $hover_color: #8e173f;
 $babushka_me_up_color: #333333;
@@ -184,9 +184,12 @@ code {
 /* the title page */
 body.babushka {
   article {
-    margin-top: 25px;
-    p, pre {
+    margin-top: $leading * 2;
+    p {
       width: $feature-width;
+    }
+    pre {
+      float: left;
     }
   }
 }
