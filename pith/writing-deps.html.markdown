@@ -1,5 +1,5 @@
 ---
-layout: "/_layout.html.erb"
+layout: "/_layout.html.haml"
 title: Writing deps
 ---
 

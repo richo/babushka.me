@@ -1,15 +1,16 @@
+$fonts: Menlo, Monaco, monospace;
 $leading: 24px;
-$gutter: 36px;
 $nav-width: 160px;
-$article-width: 540px;
-$feature-width: 360px;
-$background_color: #fff;
+$doll-width: 75px;
+$layout-width: 760px;
+$feature-width: 380px;
+$background_color: #f4f4f4;
 $hover_color: #8e173f;
 $babushka_me_up_color: #333333;
 $ruled-line: #bbb 1px solid;
 
 @mixin textured($with_background: $background_color) {
-  background: $with_background url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAC1JREFUeNpiYGBgkAJihv///4MxLj4yAxfNwIBDAMFHMxKnSVLEmjiY3AQQYADuTBThP5y9ZgAAAABJRU5ErkJggg==); }
+  background: $with_background url('../images/extra_clean_paper.jpg') top left repeat; }
 
 @mixin radius($rad: 3px) {
   -webkit-border-radius: $rad;
@@ -35,18 +36,14 @@ abbr,article,aside,canvas,figure,footer,header,hgroup,nav,section {
 * {
   margin: 0;
   padding: 0;
-  font: 13px/#{$leading} Menlo, Monaco, monospace;
 }
 
 body {
+  font-size: 13px;
+  line-height: $leading;
+  font-family: $fonts;
   background: white;
-  width: $gutter + $nav-width + $gutter + $gutter + $article-width + $gutter;
   margin: 0 auto;
-  padding-top: $leading;
-}
-
-pre {
-  overflow-x: auto;
 }
 
 a {
@@ -92,87 +89,117 @@ h2 {
 }
 
 body > aside {
-  position: fixed;
-  top: 0; right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
   padding: 0.2em 0.5em;
-  background-color: rgba(255,255,255,0.67);
   z-index: 10;
   &:before {
     content: '↪';
   }
 }
 
-body >article,
-body >nav {
-  float: left;
-  padding: 0 $gutter;
+@-webkit-keyframes jump {
+  0%   { padding-bottom: 0;    -webkit-animation-timing-function: ease-out; }
+  50%  { padding-bottom: 10px; -webkit-animation-timing-function: ease-in;  }
+  100% { padding-bottom: 0;    -webkit-animation-timing-function: ease-out; }
 }
 
-body >nav {
-  h2 {
-    margin-bottom: 0;
-  }
-  ul {
-    margin-top: 0;
+@-moz-keyframes jump {
+  0%   { padding-bottom: 0;    -moz-animation-timing-function: ease-out; }
+  50%  { padding-bottom: 10px; -moz-animation-timing-function: ease-in;  }
+  100% { padding-bottom: 0;    -moz-animation-timing-function: ease-out; }
+}
+
+body .nav-wrapper {
+  @include textured;
+  border-bottom: 1px solid #aaa;
+
+  nav {
+    width: $layout-width;
+    padding: $leading $leading 0 $leading;
+    list-style: none;
+
+    position: relative;
+    section.doll {
+      width: $doll-width;
+      h1 a {
+        position: absolute;
+        bottom: 0;
+
+        &:hover {
+          -webkit-animation-name: jump;
+          -webkit-animation-duration: 200ms;
+          -webkit-animation-duration-count: 1;
+
+          -moz-animation-name: jump;
+          -moz-animation-duration: 200ms;
+          -moz-animation-duration-count: 1;
+        }
+      }
+    }
+
+    section {
+      float: left;
+      margin-right: $leading;
+      margin-bottom: $leading;
+      h1, h2 {
+        margin: 0;
+      }
+      p {
+        margin: 0;
+        a {
+          color: #666;
+          &:link, &:visited {
+            color: #666;
+          }
+          display: block;
+          font-size: 12px;
+        }
+      }
+    }
+    overflow: hidden;
   }
 }
 
-body > article {
-  width: $article-width;
+body >article {
+  margin: $leading;
+  margin-left: $leading + $doll-width + $leading;
+  margin-bottom: $leading * 2;
+  width: $layout-width - (($leading + $doll-width) * 2);
   li {
     list-style-type: square;
   }
 }
 
-body > nav {
-  width: $nav-width;
-  text-align: right;
-  h1 {
-    @include clearfix;
-    a {
-      display: block;
-      img {
-        display: block;
-        float: right;
-        height: 88px;
-        margin-right: -15px;
-        margin-bottom: 10px;
-      }
-    }
-  }
-  h2 {
-    color: #333333;
-  }
-  ul {
-    list-style-type: none;
-  }
-}
-
-pre, code {
+pre {
   @include radius(3px);
   @include textured;
+  overflow-x: auto;
   background-color: #fafafa;
+  border: #aaa 1px solid;
+  padding: 0.5em 1em;
+  line-height: 1.4;
+  code {
+    padding: 0;
+    font-weight: normal;
+  }
 }
 
 code {
-  display: inline-block;
-  padding: 0 0.3em;
-}
-
-pre {
-  padding: 0.5em 1em;
-  line-height: 1.2;
-  code {
-    padding: 0;
-  }
+  font-family: $fonts;
+  font-weight: bold;
 }
 
 /* the title page */
 body.babushka {
   article {
-    margin-top: 25px;
-    p, pre {
+    margin-top: $leading * 2;
+    p {
       width: $feature-width;
+    }
+    pre {
+      float: left;
     }
   }
 }
