@@ -4,13 +4,13 @@ $nav-width: 160px;
 $doll-width: 75px;
 $layout-width: 760px;
 $feature-width: 360px;
-$background_color: #fff;
+$background_color: #f4f4f4;
 $hover_color: #8e173f;
 $babushka_me_up_color: #333333;
 $ruled-line: #bbb 1px solid;
 
 @mixin textured($with_background: $background_color) {
-  background: $with_background url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAC1JREFUeNpiYGBgkAJihv///4MxLj4yAxfNwIBDAMFHMxKnSVLEmjiY3AQQYADuTBThP5y9ZgAAAABJRU5ErkJggg==); }
+  background: $with_background url('../images/extra_clean_paper.jpg') top left repeat; }
 
 @mixin radius($rad: 3px) {
   -webkit-border-radius: $rad;
@@ -106,7 +106,7 @@ body > aside {
 }
 
 body .nav-wrapper {
-  background-color: #f4f4f4;
+  @include textured;
   border-bottom: 1px solid #aaa;
 
   nav {
@@ -139,9 +139,9 @@ body .nav-wrapper {
       p {
         margin: 0;
         a {
-          color: #777;
+          color: #666;
           &:link, &:visited {
-            color: #777;
+            color: #666;
           }
           display: block;
           font-size: 12px;
@@ -167,6 +167,7 @@ pre {
   @include textured;
   overflow-x: auto;
   background-color: #fafafa;
+  border: #aaa 1px solid;
   padding: 0.5em 1em;
   line-height: 1.4;
   code {
