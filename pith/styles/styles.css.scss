@@ -150,22 +150,6 @@ body >article {
   }
 }
 
-body >nav {
-  h1 {
-    @include clearfix;
-    a {
-      display: block;
-      img {
-        display: block;
-        height: 88px;
-      }
-    }
-  }
-  h2 {
-    color: #333333;
-  }
-}
-
 pre {
   @include radius(3px);
   @include textured;
