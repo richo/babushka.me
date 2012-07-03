@@ -99,6 +99,12 @@ body > aside {
   }
 }
 
+@-webkit-keyframes 'jump' {
+  0%   { padding-bottom: 0;    -webkit-animation-timing-function: ease-out; }
+  50%  { padding-bottom: 10px; -webkit-animation-timing-function: ease-in;  }
+  100% { padding-bottom: 0;    -webkit-animation-timing-function: ease-out; }
+}
+
 body .nav-wrapper {
   background-color: #f4f4f4;
   border-bottom: 1px solid #aaa;
@@ -114,6 +120,12 @@ body .nav-wrapper {
       h1 a {
         position: absolute;
         bottom: 0;
+
+        &:hover {
+          -webkit-animation-name: jump;
+          -webkit-animation-duration: 200ms;
+          -webkit-animation-duration-count: 1;
+        }
       }
     }
 
