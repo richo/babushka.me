@@ -1,7 +1,8 @@
 $fonts: Menlo, Monaco, monospace;
 $leading: 24px;
 $nav-width: 160px;
-$article-width: 540px;
+$doll-width: 75px;
+$layout-width: 760px;
 $feature-width: 360px;
 $background_color: #fff;
 $hover_color: #8e173f;
@@ -98,50 +99,52 @@ body > aside {
   }
 }
 
-body >nav,
-body >article {
-  padding-left: $leading;
-}
-
-body >nav {
+body .nav-wrapper {
   background-color: #f4f4f4;
   border-bottom: 1px solid #aaa;
-  padding-top: $leading;
-  list-style: none;
 
-  position: relative;
-  section.doll {
-    width: 75px;
-    h1 a {
-      position: absolute;
-      bottom: 0;
-    }
-  }
+  nav {
+    width: $layout-width;
+    padding: $leading $leading 0 $leading;
+    list-style: none;
 
-  section {
-    float: left;
-    margin-right: $leading;
-    margin-bottom: $leading;
-    h1, h2 {
-      margin: 0;
-    }
-    p {
-      margin: 0;
-      a {
-        color: #777;
-        &:link, &:visited {
-          color: #777;
-        }
-        display: block;
-        font-size: 12px;
+    position: relative;
+    section.doll {
+      width: $doll-width;
+      h1 a {
+        position: absolute;
+        bottom: 0;
       }
     }
+
+    section {
+      float: left;
+      margin-right: $leading;
+      margin-bottom: $leading;
+      h1, h2 {
+        margin: 0;
+      }
+      p {
+        margin: 0;
+        a {
+          color: #777;
+          &:link, &:visited {
+            color: #777;
+          }
+          display: block;
+          font-size: 12px;
+        }
+      }
+    }
+    overflow: hidden;
   }
-  overflow: hidden;
 }
 
 body >article {
-  width: $article-width;
+  margin: $leading;
+  margin-left: $leading + $doll-width + $leading;
+  margin-bottom: $leading * 2;
+  width: $layout-width - (($leading + $doll-width) * 2);
   li {
     list-style-type: square;
   }
