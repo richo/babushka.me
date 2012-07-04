@@ -100,15 +100,21 @@ body > aside {
 }
 
 @-webkit-keyframes jump {
-  0%   { padding-bottom: 0;    -webkit-animation-timing-function: ease-out; }
-  50%  { padding-bottom: 10px; -webkit-animation-timing-function: ease-in;  }
-  100% { padding-bottom: 0;    -webkit-animation-timing-function: ease-out; }
+  0% { -webkit-transform: translateY(0px); }
+  30% { -webkit-transform: translateY(-8px) rotateZ(0deg); }
+  40% { -webkit-transform: translateY(-10px) rotateZ(-4deg); }
+  60% { -webkit-transform: translateY(-10px) rotateZ(4deg); }
+  70% { -webkit-transform: translateY(-8px) rotateZ(0deg); }
+  100% { -webkit-transform: translateY(0px); }
 }
 
 @-moz-keyframes jump {
-  0%   { padding-bottom: 0;    -moz-animation-timing-function: ease-out; }
-  50%  { padding-bottom: 10px; -moz-animation-timing-function: ease-in;  }
-  100% { padding-bottom: 0;    -moz-animation-timing-function: ease-out; }
+  0% { -moz-transform: translateY(0px); }
+  30% { -moz-transform: translateY(-8px) rotateZ(0deg); }
+  40% { -moz-transform: translateY(-10px) rotateZ(-4deg); }
+  60% { -moz-transform: translateY(-10px) rotateZ(4deg); }
+  70% { -moz-transform: translateY(-8px) rotateZ(0deg); }
+  100% { -moz-transform: translateY(0px); }
 }
 
 body .nav-wrapper {
@@ -129,11 +135,11 @@ body .nav-wrapper {
 
         &:hover {
           -webkit-animation-name: jump;
-          -webkit-animation-duration: 200ms;
+          -webkit-animation-duration: 400ms;
           -webkit-animation-duration-count: 1;
 
           -moz-animation-name: jump;
-          -moz-animation-duration: 200ms;
+          -moz-animation-duration: 400ms;
           -moz-animation-duration-count: 1;
         }
       }
