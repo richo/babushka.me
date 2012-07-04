@@ -133,10 +133,12 @@ body .nav-wrapper {
         position: absolute;
         bottom: 0;
 
+        -webkit-animation-name: jump;
+        -webkit-animation-duration: 400ms;
+        -webkit-animation-iteration-count: 0;
+
         &:hover {
-          -webkit-animation-name: jump;
-          -webkit-animation-duration: 400ms;
-          -webkit-animation-duration-count: 1;
+          -webkit-animation-iteration-count: 1;
 
           -moz-animation-name: jump;
           -moz-animation-duration: 400ms;
