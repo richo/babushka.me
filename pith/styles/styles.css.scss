@@ -29,7 +29,33 @@ $ruled-line: #bbb 1px solid;
   }
 }
 
-abbr,article,aside,canvas,figure,footer,header,hgroup,nav,section {
+@mixin syntax-highlighting {
+  span.CodeRay {
+    display: block; }
+  color: #405056;
+  span.class {
+    color: #a47826; }
+  span.comment {
+    color: #92a0a0;
+    font-style: italic; }
+  span.constant {
+    color: #a47826; }
+  span.function {
+    color: #3483c5; }
+  span.keyword {
+    color: #859926; }
+  span.predefined-constant {
+    color: #3483c5; }
+  span.string {
+    background-color: darken($background_color, 4%);
+    span.delimiter {
+      color: #44a199; }
+    span.content {
+      color: #485a62; } }
+  span.symbol {
+    color: #3b8b82; } }
+
+abbr,article,aside,canvas,figcaption,figure,footer,header,hgroup,nav,section {
   display: block;
 }
 
@@ -191,6 +217,7 @@ pre {
   code {
     padding: 0;
     font-weight: normal;
+    @include syntax-highlighting;
   }
 }
 

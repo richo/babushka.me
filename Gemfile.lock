@@ -33,6 +33,7 @@ GEM
     arel (3.0.2)
     builder (3.0.0)
     clamp (0.3.0)
+    coderay (1.0.7)
     daemons (1.1.4)
     delayed_job (2.1.4)
       activesupport (~> 3.0)
@@ -112,6 +113,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  coderay
   delayed_job
   haml
   hirb
