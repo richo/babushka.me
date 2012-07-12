@@ -1,0 +1,54 @@
+---
+layout: "/_layout.html.haml"
+title: How deps work
+---
+
+:md
+  Dep is short for dependency -- one single piece of a larger task. A little nugget of code that does just one thing, and does it right.
+
+  Deps hook together by requiring each other. When you run babushka you specify a dep as an entry point, and babushka processes it and its requirements as a tree.
+
+
+  ## In code
+
+  Here's a babushka dep, at its most generic.
+
+:preruby
+  dep 'name', :argument do
+    requires 'other deps'.with('args'), 'whatever they might be'
+    met? {
+      # is this dependency already met?
+    }
+    meet {
+      # this code gets run if it isn't.
+    }
+  end
+
+:md
+  `met?` should be an idempotent block of code that returns true if the dep is "met" -- that is, if its job is already done.
+
+  `meet` shouldn't check anything at all: it should do the dep's job unconditionally. Its return value is ignored.
+
+  The interaction between `met?` and `meet` defines babushka.
+
+
+  ## met? / meet / met?
+
+  When a dep is run, its `met?` block is called. If it returns true, then the dep's job is done.
+
+  If it's unmet, though, then `meet` is run (and its return value ignored), and then `met?` is run again to see if running meet caused the dep to become met.
+
+  The idea is that `met?` and `meet` are complementary: `met?`'s job is checking whether `meet` has done its job properly.
+
+  I like to think of an unmet dep's `met?` block as a failing test, and `meet` as the code that makes that test pass.
+
+
+  ## What, not how
+
+  This implies an important part of the design: the `met?` block shouldn't just directly check that `meet` did a piece of work; that would just be trivial repetition. Instead, A good test checks the _result_ of the work. For example:
+
+  - If `meet` starts the webserver, then `met?` should check there's something listening on port 80.
+  - If `meet` bundles your app, then `met?` should run `bundle --check`.
+  - If `meet` exports a variable in your shell config, then `met?` should fork a shell and check it's set.
+
+  In short, `met?` should check `meet`'s intent, not its implementation: it should check the what, not the how.
