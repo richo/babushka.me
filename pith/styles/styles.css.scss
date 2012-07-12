@@ -1,4 +1,5 @@
-$fonts: Menlo, Monaco, monospace;
+$mono_font: Menlo, Monaco, monospace;
+$body_font: $mono_font;
 $leading: 24px;
 $nav-width: 160px;
 $doll-width: 75px;
@@ -65,9 +66,7 @@ abbr,article,aside,canvas,figcaption,figure,footer,header,hgroup,nav,section {
 }
 
 body {
-  font-size: 13px;
-  line-height: $leading;
-  font-family: $fonts;
+  font: 13px/#{$leading} $body_font;
   background: white;
   margin: 0 auto;
 }
@@ -220,7 +219,7 @@ pre {
 }
 
 code {
-  font-family: $fonts;
+  font-family: $mono_font;
   font-weight: bold;
 }
 
