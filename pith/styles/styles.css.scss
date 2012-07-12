@@ -4,7 +4,7 @@ $nav-width: 160px;
 $doll-width: 75px;
 $layout-width: 760px;
 $feature-width: 380px;
-$background_color: #f4f4f4;
+$background_color: #fff;
 $hover_color: #8e173f;
 $babushka_me_up_color: #333333;
 $ruled-line: #bbb 1px solid;
@@ -207,13 +207,11 @@ body >article {
 }
 
 pre {
-  @include radius(3px);
-  @include textured;
   overflow-x: auto;
-  background-color: #fafafa;
-  border: #aaa 1px solid;
-  padding: 0.5em 1em;
   line-height: 1.4;
+  padding: 0.5em 0;
+  border-top: #eee 1px solid;
+  border-bottom: #eee 1px solid;
   code {
     padding: 0;
     font-weight: normal;
