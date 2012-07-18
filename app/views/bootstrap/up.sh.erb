@@ -145,7 +145,7 @@ function clean_up_install_dir {
   mkdir -p "$home/.babushka" &&
   cd "$home/.babushka" &&
   rm -rf "bootstrap"
-  cd
+  cd "$home"
 }
 
 function create_install_dir {
