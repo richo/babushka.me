@@ -27,16 +27,32 @@ module HamlHelpers
     "<pre><code class='#{lang}'>#{CodeRay.scan(text.strip, lang).span(:css => :class)}</code></pre>"
   end
 
-  def captioned text, lang
-    code, caption = text.split("\n\n", 2)
+  def strip_tag tag, text
+    markdown(text).sub(%r{^<#{tag}>},  '').sub(%r{</#{tag}>$}, '')
+  end
 
-    formatted_caption = markdown(caption).sub(%r{^<p>},  '').sub(%r{</p>$}, '')
+  def captioned text, lang
+    figure(text) {|code,caption| [
+      highlight(code, lang),
+      strip_tag('p', markdown(caption))
+    ] }
+  end
+
+  def pre_captioned text, lang
+    figure(text, %w[precaption]) {|code,caption| [
+      highlight(code, lang),
+      "<pre><code>#{strip_tag('p', markdown(caption))}</code></pre>"
+    ] }
+  end
+
+  def figure text, classes = []
+    code, caption = yield(*text.split("\n\n", 2))
 
     %Q{
-      <figure class="code">
-        #{highlight(code, lang)}
+      <figure class="#{classes.push('code').join(' ')}">
+        #{code}
         <figcaption>
-          #{formatted_caption}
+          #{caption}
         </figcaption>
       </figure>
     }
@@ -76,6 +92,13 @@ module Haml::Filters::Captionedruby
   include Haml::Filters::Base
   def render text
     HamlHelpers.captioned(text, :ruby)
+  end
+end
+
+module Haml::Filters::Precaptionedruby
+  include Haml::Filters::Base
+  def render text
+    HamlHelpers.pre_captioned(text, :ruby)
   end
 end
 
