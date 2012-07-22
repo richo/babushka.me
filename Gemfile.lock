@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/mdub/pith.git
+  revision: 98d46b8478cf709bbb4fb4b804ef213fba18259a
+  ref: 98d46b8
+  specs:
+    pith (0.3.1)
+      clamp (>= 0.3.0)
+      rack (>= 1.2.1)
+      thin (>= 1.2.7)
+      tilt (>= 1.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -28,13 +39,11 @@ GEM
     activesupport (3.2.6)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    adsf (1.0.1)
-      rack (>= 1.0.0)
     arel (3.0.2)
     builder (3.0.0)
-    clamp (0.3.0)
+    clamp (0.4.0)
     coderay (1.0.7)
-    daemons (1.1.4)
+    daemons (1.1.8)
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
@@ -56,12 +65,6 @@ GEM
     multi_json (1.3.6)
     newrelic_rpm (3.3.0)
     pg (0.11.0)
-    pith (0.2.3)
-      adsf (>= 1.0.1)
-      clamp (>= 0.3.0)
-      rack (>= 1.2.1)
-      thin (>= 1.2.7)
-      tilt (>= 1.3)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -94,7 +97,7 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    thin (1.3.1)
+    thin (1.4.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
@@ -120,7 +123,7 @@ DEPENDENCIES
   kramdown
   newrelic_rpm
   pg
-  pith
+  pith!
   rails (= 3.2.6)
   sass
   unicorn
