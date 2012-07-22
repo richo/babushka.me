@@ -221,6 +221,20 @@ body >article {
   li {
     list-style-type: square;
   }
+  figure.precaption {
+    overflow: hidden;
+    border-bottom: #eee 1px solid;
+    pre {
+      margin: 0;
+    }
+    >pre,
+    figcaption >pre {
+      width: 50%;
+      border-bottom: none;
+    }
+    >pre { float: left; }
+    figcaption >pre { float: right; }
+  }
 }
 
 pre {
