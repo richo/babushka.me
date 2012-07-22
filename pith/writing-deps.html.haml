@@ -1,0 +1,108 @@
+---
+layout: "/_layout.html.haml"
+title: Writing deps
+---
+
+:md
+  It's all very well to run `babushka blah` and have it do jobs for you, but the real power is in babushka's ability to automate whatever chore you want, not just ones that others have thought of already.
+
+
+  ## Context (or lack of it)
+
+  When you're writing a dep, you don't have to think about context at all, just one little task in isolation. As long as your `requires` are correct, you can leave the overall structure to babushka and just write each little dep separately.
+
+  When you invoke the dep, babushka uses the `requires` in each dep to assemble a tree of deps and achieve the end goal you're after.
+
+  The other reason to ignore context when writing each dep is that context is coupling. Keeping deps decoupled means they can be more easily re-used in different situations, where the context is probably different.
+
+
+  ## Plain deps
+
+  The section on [how deps work](/dep-sources) explains the structure of a dep. To see how each section works, let's build a simple dep to symlink a directory. _Code on the left, shell output on the right._
+
+:precaptionedruby
+  dep 'work symlinked'
+
+  \> babushka 'work symlinked'
+  work symlinked {
+  } ✓ work symlinked
+  \>
+
+
+:md
+  That's the simplest dep there is. Since the `met?` and `meet` blocks are both empty, though, it's not very useful: an empty `met?` block defaults to true (so that deps that do nothing but require other deps act as a passthrough).
+
+  Let's add a `met?` block with a simple check.
+
+:precaptionedruby
+  dep 'work symlinked' do
+    met? {
+      "~/work".p.exists?
+    }
+  end
+
+  \> babushka 'work symlinked'
+  work symlinked {
+    meet {
+    }
+  } ✗ work symlinked
+  \>
+
+:md
+  This time, the logic we put in the `met?` block returned false (because `~/work` didn't exist). This is where `meet` comes in: it's a piece of logic that, when run, should make `met?` return true. To see when the blocks are run, let's add some logging:
+
+:precaptionedruby
+  dep 'work symlinked' do
+    met? {
+      "~/work".p.exists?.tap {|result|
+        log "met?: \#{result}."
+      }
+    }
+  end
+
+  \> babushka 'work symlinked'          
+  work symlinked {
+    met?: false.
+    meet {
+    }
+    met?: false.
+  } ✗ work symlinked
+  \> 
+
+:md
+  Here we can see babushka re-running `met?` after running `meet`. This is how deps work (detailed [here](/how-deps-work)): it's the work `meet` did on the system, not its return value, that matters.
+
+  Next, let's fill in the `meet` block to complete the dep.
+
+:precaptionedruby
+  dep 'work symlinked' do
+    met? {
+      "~/work".p.exists?.tap {|result|
+        log "met?: \#{result}."
+      }
+    }
+    meet {
+      shell "ln -s ~/jobs/acme ~/work"
+      log "made the symlink."
+    }
+  end
+
+  \> babushka 'work symlinked'
+  work symlinked {
+    met?: false.
+    meet {
+      made the symlink.
+    }
+    met?: true.
+  } ✓ work symlinked
+  \>
+
+:md
+  ## Dep parameters
+
+
+
+
+  ## Templated Deps
+
+  TODO
