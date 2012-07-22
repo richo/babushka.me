@@ -4,6 +4,7 @@ $leading: 24px;
 $nav-width: 160px;
 $doll-width: 75px;
 $layout-width: 760px;
+$article-width: $layout-width - (($leading + $doll-width) * 2);
 $feature-width: 380px;
 $background_color: #fff;
 $hover_color: #8e173f;
@@ -217,11 +218,15 @@ body >article {
   margin: $leading;
   margin-left: $leading + $doll-width + $leading;
   margin-bottom: $leading * 2;
-  width: $layout-width - (($leading + $doll-width) * 2);
+  >* {
+    width: $article-width;
+  }
   li {
     list-style-type: square;
   }
+  $caption-width: $article-width * 0.5;
   figure.precaption {
+    width: $article-width + $caption-width + $leading;
     overflow: hidden;
     border-bottom: #eee 1px solid;
     pre {
@@ -229,11 +234,17 @@ body >article {
     }
     >pre,
     figcaption >pre {
-      width: 50%;
-      border-bottom: none;
+      border-bottom: 0;
     }
-    >pre { float: left; }
-    figcaption >pre { float: right; }
+    >pre {
+      width: $article-width;
+      float: left;
+    }
+    figcaption >pre {
+      float: right;
+      width: $caption-width;
+      padding-left: $leading;
+    }
   }
 }
 
