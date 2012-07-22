@@ -16,7 +16,7 @@ title: Writing deps
   The other reason to ignore context when writing each dep is that context is coupling. Keeping deps decoupled means they can be more easily re-used in different situations, where the context is probably different.
 
 
-  ## Plain deps
+  ## Writing `met?` and `meet`
 
   The section on [how deps work](/dep-sources) explains the structure of a dep. To see how each section works, let's build a simple dep to symlink a directory. _Code on the left, shell output on the right._
 
@@ -30,13 +30,17 @@ title: Writing deps
 
 
 :md
-  That's the simplest dep there is. Since the `met?` and `meet` blocks are both empty, though, it's not very useful: an empty `met?` block defaults to true (so that deps that do nothing but require other deps act as a passthrough).
+  That's the simplest dep there is: you don't need to supply a dep block if you have nothing to put in it. Since the `met?` and `meet` blocks both default to being empty, though, it's not very useful.
+  
+  _An empty `met?` block defaults to true (so that deps that do nothing but require other deps act as passthroughs)._
 
   Let's add a `met?` block with a simple check.
 
 :precaptionedruby
   dep 'work symlinked' do
     met? {
+      # The String#p patch expands the string and returns
+      # a Fancypath, which has lots of useful helpers.
       "~/work".p.exists?
     }
   end
@@ -49,7 +53,7 @@ title: Writing deps
   \>
 
 :md
-  This time, the logic we put in the `met?` block returned false (because `~/work` didn't exist). This is where `meet` comes in: it's a piece of logic that, when run, should make `met?` return true. To see when the blocks are run, let's add some logging:
+  This time, the logic we put in the `met?` block returned false (because `~/work` didn't exist). To see when that block is being run, let's add some logging:
 
 :precaptionedruby
   dep 'work symlinked' do
@@ -60,7 +64,7 @@ title: Writing deps
     }
   end
 
-  \> babushka 'work symlinked'          
+  \> babushka 'work symlinked'
   work symlinked {
     met?: false.
     meet {
@@ -70,9 +74,9 @@ title: Writing deps
   \> 
 
 :md
-  Here we can see babushka re-running `met?` after running `meet`. This is how deps work (detailed [here](/how-deps-work)): it's the work `meet` did on the system, not its return value, that matters.
+  This shows that babushka is running the `met?` block twice: first to check, and then again after running `meet` (which is empty in this case). This is where `meet` comes in: it's a piece of logic that, when run, should make `met?` return true.
 
-  Next, let's fill in the `meet` block to complete the dep.
+  Let's fill in the `meet` block to complete the dep.
 
 :precaptionedruby
   dep 'work symlinked' do
@@ -98,10 +102,15 @@ title: Writing deps
   \>
 
 :md
+  This is how deps work (detailed [here](/how-deps-work)): it's the work `meet` did on the system, not its return value, that matters. Once `meet` runs, the `met?` check is passing, and we're done.
+
+  ## Requirements
+
+  TODO
+
   ## Dep parameters
 
-
-
+  TODO
 
   ## Templated Deps
 
