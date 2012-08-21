@@ -14,7 +14,9 @@ class Run < ActiveRecord::Base
   before_validation :load_dep_and_source
 
   def load_dep_and_source
-    existing_source = Source.find_or_create_by_uri(source_uri)
-    self.dep = existing_source.deps.find_or_create_by_name(dep_name)
+    existing_source = Source.find_or_create_by_uri!(source_uri)
+    self.dep = existing_source.deps.find_or_create_by_name!(dep_name)
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 end
