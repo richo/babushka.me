@@ -4,5 +4,6 @@ class Source < ActiveRecord::Base
 
   validates_presence_of :uri
   validates_uniqueness_of :uri
+  validates_format_of :uri, with: %r{^git://}
 
 end
