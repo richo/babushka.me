@@ -2,7 +2,7 @@ class Dep < ActiveRecord::Base
 
   belongs_to :source
 
-  has_many :runs
+  has_many :runs, :dependent => :destroy
 
   validates_presence_of :source, :name
   validates_uniqueness_of :name, :scope => :source_id
