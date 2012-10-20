@@ -1,7 +1,8 @@
 class BootstrapController < ApplicationController
   def up
-    ref = (params[:ref] || '').sub(/^hard,?/, '').sub(/,?hard$/, '')
-    ref = 'master' if ref.blank?
+    # This param used to be comma-separated options ('hard'/'next')
+    # but is now a ref, defaulting to 'master'.
+    ref = ((params[:ref] || '').split(',').push('master') - %w[hard next]).first
 
     render action: 'up', layout: false, locals: {ref: ref}
   end
