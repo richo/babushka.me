@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# These two are rendered per-request by the babushka webservice.
+# The ref is rendered per-request by the babushka webservice.
 ref=<%= ref %>
-deprecated_hard=<%= deprecated_hard %>
 
 # Can't use $HOME, because sometimes it's not set.
 # Can't use ~, because it depends on $HOME to expand.
@@ -48,14 +47,6 @@ function install_pkgs {
     yum) yum -y install $1 ;;
     *)
   esac
-}
-
-function warn_about_deprecated_hard {
-  if [ $deprecated_hard ]; then
-    echo ""
-    echo "### The 'hard' option is deprecated. Instead, just use the plain"
-    echo "### babushka.me/up -- it only prompts when run on a terminal now."
-  fi
 }
 
 function logo {
@@ -219,7 +210,6 @@ function do_bootstrap {
   handle_install && on_install_success || on_install_failure
 }
 
-warn_about_deprecated_hard
 logo
 if check; then
   if welcome; then
