@@ -47,7 +47,7 @@ GEM
     clamp (0.5.0)
     coderay (1.0.8)
     daemons (1.1.9)
-    delayed_job (3.0.3)
+    delayed_job (2.1.4)
       activesupport (~> 3.0)
     erubis (2.7.0)
     eventmachine (1.0.0)
