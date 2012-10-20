@@ -2,10 +2,12 @@ source :rubygems
 
 gem 'rails', '3.2.7'
 gem 'unicorn'
-gem 'pg'
-gem 'hirb'
+
+gem 'bugsnag'
 gem 'delayed_job'
+gem 'hirb'
 gem 'newrelic_rpm'
+gem 'pg'
 
 gem 'pith', git: "git://github.com/mdub/pith.git", ref: "98d46b8"
 gem 'haml'
