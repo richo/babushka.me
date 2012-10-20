@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # The ref is rendered per-request by the babushka webservice.
 ref=<%= ref %>
@@ -14,21 +14,21 @@ to="$home/.babushka/bootstrap"
 
 interactive=$([ -t 0 ] && echo 'true')
 
-function true_with { echo -e "\n$1"; true; }
-function false_with { echo -e "\n$1"; false; }
+true_with () { echo -e "\n$1"; true; }
+false_with () { echo -e "\n$1"; false; }
 
-function has {
+has () {
   type "$1" >/dev/null 2>&1
 }
 
-function pkg_manager {
-  managers=(aptitude apt-get brew pacman yum)
-  for manager in "${managers[@]}"; do
+pkg_manager () {
+  managers="aptitude apt-get brew pacman yum"
+  for manager in ${managers}; do
     has "$manager" && echo "$manager" && exit
   done
 }
 
-function update_manager {
+update_manager () {
   case $(pkg_manager) in
     apt-get) apt-get update -qqy ;;
     aptitude) aptitude -y update ;;
@@ -38,7 +38,7 @@ function update_manager {
   esac
 }
 
-function install_pkgs {
+install_pkgs () {
   case $(pkg_manager) in
     apt-get) apt-get install -qqy $1 ;;
     aptitude) aptitude -y install $1 ;;
@@ -49,7 +49,7 @@ function install_pkgs {
   esac
 }
 
-function logo {
+logo () {
   echo ""
   echo ".       .           .   .      "
   echo "|-. ,-. |-. . . ,-. |-. | , ,-."
@@ -57,7 +57,7 @@ function logo {
   echo "^-' \`-^ ^-' \`-^ \`-' ' ' ' \` \`-^"
 }
 
-function check {
+check () {
   if ! has 'curl'; then
     if ! has $(pkg_manager); then
       echo "Sorry, you don't have curl installed, and I couldn't find\na package manager I recognise."
@@ -81,7 +81,7 @@ function check {
   fi
 }
 
-function welcome {
+welcome () {
   echo ""
   echo "Hi there :)"
   echo ""
@@ -106,13 +106,20 @@ function welcome {
   if [ "$interactive" = 'true' ]; then
     echo ""
     read -p "Sound good? [y/N] " f
-    [[ "$f" == y* ]] || [[ "$f" == Y* ]]
+    case $f in
+      "y"*)
+        true;;
+      "Y"*)
+        true;;
+      *)
+        false;;
+    esac
   else
     true
   fi
 }
 
-function install_pkgs_if_required {
+install_pkgs_if_required () {
   if has 'ruby' && has 'curl'; then
     true # already installed
   else
@@ -132,33 +139,33 @@ function install_pkgs_if_required {
   fi
 }
 
-function clean_up_install_dir {
+clean_up_install_dir () {
   mkdir -p "$home/.babushka" &&
   cd "$home/.babushka" &&
   rm -rf "bootstrap"
   cd "$home"
 }
 
-function create_install_dir {
+create_install_dir () {
   clean_up_install_dir &&
   mkdir -p "$to" &&
   cd "$to"
 }
 
-function stream_tarball {
+stream_tarball () {
   echo ""
   echo "Right, downloading a tarball of babushka $ref."
   curl -L -\# "$from" | tar -zxf - --strip-components 1
 }
 
-function handle_install {
+handle_install () {
   echo "Invoking babushka $(cd "$to" && bin/babushka.rb --version) to handle the install."
   echo ""
   ruby "$to/bin/babushka.rb" meet babushka version="$ref" $([ "$interactive" = 'true' ] || echo '--defaults')
   [ $? -eq 0 ]
 }
 
-function on_install_success {
+on_install_success () {
   clean_up_install_dir
 
   echo ""
@@ -190,7 +197,7 @@ function on_install_success {
   true
 }
 
-function on_install_failure {
+on_install_failure () {
   echo ""
   echo "Something went wrong during the install."
   echo ""
@@ -203,7 +210,7 @@ function on_install_failure {
   false
 }
 
-function do_bootstrap {
+do_bootstrap () {
   install_pkgs_if_required &&
   create_install_dir &&
   stream_tarball &&
