@@ -24,7 +24,7 @@ has () {
 
 pkg_manager () {
   managers="aptitude apt-get brew pacman yum"
-  for manager in "${managers}"; do
+  for manager in ${managers}; do
     has "$manager" && echo "$manager" && exit
   done
 }
