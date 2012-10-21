@@ -7,15 +7,15 @@ You can install babushka on your system, no matter what state it's in, using `ba
 
 All you need is something that can fetch over https. Mac OS X and some Linux distros ship with `curl`:
 
-    bash -c "`curl https://babushka.me/up`"
+    sh -c "`curl https://babushka.me/up`"
 
 Some other Linux distros have `wget` instead. Linux VPSes with only `wget` installed usually don't have openssl, which means no https downloads. You could install curl first (which should pull in openssl):
 
-    apt-get install -y curl && bash -c "`curl https://babushka.me/up`"
+    apt-get install -y curl && sh -c "`curl https://babushka.me/up`"
 
 Or just cowboy it over `http://` with wget.
 
-    bash -c "`wget -O - babushka.me/up`" # Hijack me, please!
+    sh -c "`wget -O - babushka.me/up`" # Hijack me, please!
 
 
 ## What it does
@@ -32,14 +32,14 @@ Or just cowboy it over `http://` with wget.
 
 The bootstrap script prompts for confirmation and an install prefix. If you're scripting the install, fear not: it runs unconditionally, accepting the defaults for those prompts, if STDIN isn't attached to a terminal. If you'd like to run a prompt-less install at the terminal, just attach `STDIN` to `/dev/null` instead:
 
-    bash -c "`curl babushka.me/up`" </dev/null
+    sh -c "`curl babushka.me/up`" </dev/null
 
 
 ## Versions
 
 You can pass a git ref to `babushka.me/up` to install a different babushka version. The default is `master`.
 
-    bash -c "`curl babushka.me/up/<ref>`"
+    sh -c "`curl babushka.me/up/<ref>`"
 
 You can supply any ref that github serves as a tarball. Some common ones:
 
