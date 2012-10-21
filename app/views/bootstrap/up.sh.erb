@@ -9,6 +9,9 @@ ref=<%= ref %>
 # So: write a string in which ~$(whoami) is expanded, and run it in a subshell.
 home=$(sh -c "echo ~$(whoami)")
 
+# The name of the shell we're running on.
+shell=$(ps -c -o command -p $$ | tail -n1 | sed -e 's/^\-//')
+
 from="https://nodeload.github.com/benhoskings/babushka/tarball/$ref"
 to="$home/.babushka/bootstrap"
 
@@ -105,8 +108,15 @@ welcome() {
 
   if [ "$interactive" = 'true' ]; then
     echo ""
-    read -p "Sound good? [y/N] " f
-    case $f in
+    confirmed=""
+    if [ "$shell" = "zsh" ]; then
+      vared -p "Sound good? [y/N] " confirmed
+    elif [ "$shell" = "bash" ]; then
+      read -e -p "Sound good? [y/N] " confirmed
+    else
+      read -p "Sound good? [y/N] " confirmed
+    fi
+    case $confirmed in
       "y"*) true;;
       "Y"*) true;;
       *)    false;;
