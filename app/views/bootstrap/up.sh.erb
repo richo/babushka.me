@@ -60,19 +60,19 @@ logo() {
 check() {
   if ! has 'curl'; then
     if ! has $(pkg_manager); then
-      echo "Sorry, you don't have curl installed, and I couldn't find\na package manager I recognise."
+      echo "Sorry, you don't have curl installed, and I couldn't find a package manager I recognise."
       has 'wget' && echo "(You do have wget, but the version on most stock VPS images doesn't do SSL.)"
       false
     elif [ $(whoami) != 'root' ] && [ $(pkg_manager) != 'brew' ]; then
-      false_with "You don't have curl installed. I can install it via $(pkg_manager),\nbut only when running as root."
+      false_with "You don't have curl installed. I can install it via $(pkg_manager), but only when running as root."
     else
       true
     fi
   elif ! has 'ruby'; then
     if ! has $(pkg_manager); then
-      false_with "Sorry, you don't have ruby installed, and I couldn't find\na package manager I recognise."
+      false_with "Sorry, you don't have ruby installed, and I couldn't find a package manager I recognise."
     elif [ $(whoami) != 'root' ] && [ $(pkg_manager) != 'brew' ]; then
-      false_with "You don't have ruby installed. I can install it via $(pkg_manager),\nbut only when running as root."
+      false_with "You don't have ruby installed. I can install it via $(pkg_manager), but only when running as root."
     else
       true
     fi
