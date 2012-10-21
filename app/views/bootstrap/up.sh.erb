@@ -15,7 +15,7 @@ shell=$(ps -c -o command -p $$ | tail -n1 | sed -e 's/^\-//')
 from="https://nodeload.github.com/benhoskings/babushka/tarball/$ref"
 to="$home/.babushka/bootstrap"
 
-interactive=$([ -t 0 ] && echo 'true')
+interactive=$([ -t 0 ] && echo 'true' || echo 'false')
 
 true_with() { echo -e "\n$1"; true; }
 false_with() { echo -e "\n$1"; false; }
@@ -106,7 +106,9 @@ welcome() {
     echo "- You don't have ruby installed, so we'll install it (using $(pkg_manager))."
   fi
 
-  if [ "$interactive" = 'true' ]; then
+  if [ "$interactive" = 'false' ]; then
+    true
+  else
     echo ""
     confirmed=""
     if [ "$shell" = "zsh" ]; then
@@ -121,8 +123,6 @@ welcome() {
       "Y"*) true;;
       *)    false;;
     esac
-  else
-    true
   fi
 }
 
