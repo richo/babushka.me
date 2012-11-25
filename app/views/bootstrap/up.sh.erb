@@ -25,7 +25,7 @@ has() {
 }
 
 pkg_manager() {
-  managers="aptitude apt-get brew pacman yum"
+  managers="aptitude apt-get brew pacman yum pkg_add"
   for manager in ${managers}; do
     has "$manager" && echo "$manager" && exit
   done
@@ -38,6 +38,7 @@ update_manager() {
     brew) brew update ;;
     pacman) true ;;
     yum) true ;;
+    pkg_add) true ;;
     *)
   esac
 }
@@ -49,6 +50,7 @@ install_pkgs() {
     brew) brew install $1 ;;
     pacman) pacman -Syq --noconfirm --noprogressbar $1 ;;
     yum) yum -y install $1 ;;
+    pkg_add) pkg_add -r $1 ;;
     *)
   esac
 }
