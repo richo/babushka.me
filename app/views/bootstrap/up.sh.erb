@@ -36,6 +36,7 @@ update_manager() {
     apt-get) apt-get update -qqy ;;
     aptitude) aptitude -y update ;;
     brew) brew update ;;
+    pacman) true ;;
     yum) true ;;
     *)
   esac
