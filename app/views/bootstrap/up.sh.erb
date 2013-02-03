@@ -48,7 +48,7 @@ install_pkgs() {
     apt-get) apt-get install -qqy $1 ;;
     aptitude) aptitude -y install $1 ;;
     brew) brew install $1 ;;
-    pacman) pacman -Sq --noconfirm --noprogressbar $1 ;;
+    pacman) pacman -S --noconfirm --noprogressbar $1 ;;
     yum) yum -y install $1 ;;
     pkg_add) pkg_add -r $1 ;;
     *)
