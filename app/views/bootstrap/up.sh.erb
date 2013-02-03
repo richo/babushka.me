@@ -164,7 +164,7 @@ create_install_dir() {
 
 stream_tarball() {
   echo ""
-  echo "Right, downloading a tarball of babushka $ref."
+  echo "Right, downloading a tarball of babushka @ $ref."
   curl -L -\# "$from" | tar -zxf - --strip-components 1
 }
 
