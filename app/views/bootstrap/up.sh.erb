@@ -36,7 +36,7 @@ update_manager() {
     apt-get) apt-get update -qqy ;;
     aptitude) aptitude -y update ;;
     brew) brew update ;;
-    pacman) true ;;
+    pacman) pacman -Sy ;;
     yum) true ;;
     pkg_add) true ;;
     *)
@@ -48,7 +48,7 @@ install_pkgs() {
     apt-get) apt-get install -qqy $1 ;;
     aptitude) aptitude -y install $1 ;;
     brew) brew install $1 ;;
-    pacman) pacman -Syq --noconfirm --noprogressbar $1 ;;
+    pacman) pacman -Sq --noconfirm --noprogressbar $1 ;;
     yum) yum -y install $1 ;;
     pkg_add) pkg_add -r $1 ;;
     *)
