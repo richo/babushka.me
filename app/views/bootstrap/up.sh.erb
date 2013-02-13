@@ -9,9 +9,6 @@ ref=<%= ref %>
 # So: write a string in which ~$(whoami) is expanded, and run it in a subshell.
 home=$(sh -c "echo ~$(whoami)")
 
-# The name of the shell we're running on.
-shell=$(ps -c -o command -p $$ | tail -n1 | sed -e 's/^\-//')
-
 from="https://github.com/benhoskings/babushka/archive/$ref.tar.gz"
 to="$home/.babushka/bootstrap"
 
@@ -114,9 +111,9 @@ welcome() {
   else
     echo ""
     confirmed=""
-    if [ "$shell" = "zsh" ]; then
+    if [ -n "$ZSH_VERSION" ]; then
       vared -p "Sound good? [y/N] " confirmed
-    elif [ "$shell" = "bash" ]; then
+    elif [ -n "$BASH_VERSION" ]; then
       read -e -p "Sound good? [y/N] " confirmed
     else
       read -p "Sound good? [y/N] " confirmed
